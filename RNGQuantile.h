@@ -15,17 +15,18 @@ class RNGQuantile
 {
     std::string description;
     
-    TRandom3 *rng;
     TH1D* quantileHisto;
     TH1D* distributionHisto;
     TCanvas *cnv;
     TFile *file;
+
+protected:
     
     bool ready;
+    TRandom3 *rng;
     
 public:
-    
-    
+
     void SetDescription(std::string descr);
     void OpenQuantileFile(std::string filename);
     void SaveDistribution(std::string filename="RNGdistribution.root");

@@ -10,42 +10,36 @@
 #include "RNGQuantile.h"
 
 
-class ParticleGenerator
+class ParticleGenerator : public RNGQuantile
 {
     Particle particle;
-    RNGQuantile rngq;
-    TRandom3 * rng_uniform;
     double thetaMin, thetaMax;
-    double phiMin, phiMax
+    double phiMin, phiMax;
+    double areaWidth, areaHeight;
     
-    void OpenMomentumMagnitudeQuantile()
+    void RollTheDice(); //all random generators does the thing to obtain all the needed parameters
+
+    //using RNGQuantile::GetRandom(); //this one pethod of RNGQuantile should be hidden
     
-    void setThetaRange(double theta_min=0, double theta_max=1.57080); // theta_max = Pi/2 [radians]
-    void setPhiRange(double phi_min=0, double theta_max=6.28319); //phi_max = Pi*2 [radians]
+public:
     
-    Particle GetRandomParticle();
+    void SetPID(int id=0);
+    
+    //solid angle definition
+    void SetThetaRange(double theta_min=0, double theta_max=1.57080); // theta_max = Pi/2 [radians]
+    void SetPhiRange(double phi_min=0, double theta_max=6.28319); //phi_max = Pi*2 [radians]
+    
+    //area dimenstions definition
+    void SetAreaXYSize(double x=1, double y=1); // [meters]
+    
+    Particle& GetRandomParticle();
     Particle& GetParticle();
     
+    void Print();
     
-    
-private:
-    
-    void RollTheDice();
-    
-    
+    ParticleGenerator();
+    //~ParticleGenerator();
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
