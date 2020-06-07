@@ -26,7 +26,7 @@ class Coords
         eCoordinateSystem GetCoordinateSystem();
         
         double operator[](int index);
-        const Coords& operator=(const Coords &instance_to_copy);
+        Coords operator=(Coords instance_to_copy);
     
         Coords(double x=0, double y=0, double z=0, eCoordinateSystem system  = eCoordinateSystem::carthesian);
         Coords(const Coords& instance_to_copy);

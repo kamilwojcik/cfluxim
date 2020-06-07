@@ -31,6 +31,7 @@ public:
     void OpenQuantileFile(std::string filename);
     void SaveDistribution(std::string filename="RNGdistribution.root");
     void SaveDistributionPng(std::string filename="RNGdistribution.png");
+    void ResetDistribution();
     
     double GetRandom();
     

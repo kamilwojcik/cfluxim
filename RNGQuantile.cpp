@@ -57,6 +57,13 @@ void RNGQuantile::SaveDistributionPng(std::string filename)
     return;
 }
 
+void RNGQuantile::ResetDistribution()
+{
+    distributionHisto->Reset();
+    
+    return;
+}
+
 //////////////////////////////////////
 //get
 

@@ -1,4 +1,6 @@
-#include "fluxsym.h"
+#include "../Particle.h"
+#include "../Momentum.h"
+#include "../Coords.h"
 #include <iostream>
 
 using namespace std;

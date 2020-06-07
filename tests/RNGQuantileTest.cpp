@@ -2,7 +2,7 @@
 #include <string>
 #include "TH1D.h"
 
-#include "RNGQuantile.h"
+#include "../RNGQuantile.h"
 
 using namespace std;
 

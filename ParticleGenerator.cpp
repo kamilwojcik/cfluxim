@@ -23,7 +23,7 @@ void ParticleGenerator::RollTheDice()
     
         particle.SetPosition(rng->Rndm()*areaWidth, rng->Rndm()*areaHeight, 0);
     }
-    else cout<<"Quantile not set! Nothing to do."<<endl;
+    else cout<<"\nWARNING: unable to generate particle!\nQuantile not set! Use the SetQuantileFile(\"[filename.root]\") method to fix it.\n"<<endl;
 }
 
 //////////////////////////////////////////
@@ -86,6 +86,7 @@ Particle& ParticleGenerator::GetParticle()
 
 void ParticleGenerator::Print()
 {
+    cout<<"+++++++++++++++++++++++++"<<endl;
     cout<<"Particle generator status"<<endl;
     RNGQuantile::Print();
     cout<<"Area: "<<areaWidth<<" x "<<areaHeight<<endl;
@@ -94,7 +95,7 @@ void ParticleGenerator::Print()
     
     cout<<"\nCurrent particle:"<<endl;
     particle.Print();
-    
+    cout<<"+++++++++++++++++++++++++"<<endl;
     return;
 }
 
@@ -105,18 +106,7 @@ void ParticleGenerator::Print()
 ParticleGenerator::ParticleGenerator()
 {
     RNGQuantile();
-    areaWidth=0;
-    areaHeight=0;
-    thetaMin=0;
-    thetaMax=0;
-    phiMin=0;
-    phiMax=0;
+    SetAreaXYSize();
+    SetThetaRange();
+    SetPhiRange();
 }
-
-///////////////////////////////////////////
-//destructor
-
-//ParticleGenerator::~ParticleGenerator()
-//{
-//    RNGQuantile::~RNGQuantile();
-//}

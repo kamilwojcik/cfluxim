@@ -1,5 +1,5 @@
 #include <iostream>
-#include "fluxsym.h"
+#include "../Coords.h"
 
 using namespace std;
 

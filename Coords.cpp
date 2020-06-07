@@ -8,23 +8,24 @@
 Coords polarToCarthesian(Coords polar)
 {
     double x,y,z;
-    z = polar[0]*std::sin(polar[2]);
-    x = polar[0]*std::cos(polar[2])*std::cos(polar[1]);
-    y = polar[0]*std::cos(polar[2])*std::sin(polar[1]);
+    x = polar[0]*std::sin(polar[1])*std::cos(polar[2]);
+    y = polar[0]*std::sin(polar[1])*std::sin(polar[2]);
+    z = polar[0]*std::cos(polar[1]);
+    
     Coords carthesian_coords(x,y,z);
     return carthesian_coords;
 }
 
 Coords carthesianToPolar(Coords carthesian)
 {
-    double r, phi, theta;
+    double r, theta, phi;
     r = std::sqrt( carthesian[0]*carthesian[0] + carthesian[1]*carthesian[1] + carthesian[2]*carthesian[2] );
-    phi = atan2( carthesian[1],  carthesian[0] );
     theta = atan( carthesian[2]/std::sqrt( carthesian[0]*carthesian[0] + carthesian[1]*carthesian[1] ) );
+    phi = atan2( carthesian[1],  carthesian[0] );
     
     if ( carthesian[0] == 0 && carthesian[1] == 0 && carthesian[2] == 0 ) theta=0;
     
-    Coords polar_coords(r, phi, theta, eCoordinateSystem::polar);
+    Coords polar_coords(r, theta, phi, eCoordinateSystem::polar);
     return polar_coords;
 }
 
@@ -83,7 +84,7 @@ void Coords::Print()
     switch(coord_system)
     {
         case eCoordinateSystem::polar:
-        std::cout<<"polar: r="<< a1 <<" phi="<<a2<<" (deg: "<< a2*180/PI <<")"<<" theta="<<a3<<" (deg: "<< a3*180/PI <<")"<<std::endl;
+        std::cout<<"polar: r="<< a1 <<" theta="<<a2<<" (deg: "<< a2*180/PI <<")"<<" phi="<<a3<<" (deg: "<< a3*180/PI <<")"<<std::endl;
         break;
         
         case eCoordinateSystem::carthesian:
@@ -93,6 +94,10 @@ void Coords::Print()
     
     return;
 }
+
+
+/////////////////////////
+//get
 
 eCoordinateSystem Coords::GetCoordinateSystem()
 {
@@ -112,7 +117,7 @@ double Coords::operator[](int index)
 }
 
 
-const Coords& Coords::operator=(const Coords& instance_to_copy)
+Coords Coords::operator=(Coords instance_to_copy)
 {
     a1=instance_to_copy.a1;
     a2=instance_to_copy.a2;

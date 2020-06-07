@@ -27,7 +27,7 @@ public:
     
     //solid angle definition
     void SetThetaRange(double theta_min=0, double theta_max=1.57080); // theta_max = Pi/2 [radians]
-    void SetPhiRange(double phi_min=0, double theta_max=6.28319); //phi_max = Pi*2 [radians]
+    void SetPhiRange(double phi_min=0, double phi_max=6.28319); //phi_max = Pi*2 [radians]
     
     //area dimenstions definition
     void SetAreaXYSize(double x=1, double y=1); // [meters]
@@ -38,7 +38,6 @@ public:
     void Print();
     
     ParticleGenerator();
-    //~ParticleGenerator();
 };
 
 

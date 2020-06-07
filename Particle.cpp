@@ -9,7 +9,7 @@
 //set
 
 
-void Particle::SetPosition(const Coords& pos)
+void Particle::SetPosition(Coords& pos)
 {
     position=pos;
     position.SetSystem(eCoordinateSystem::carthesian);
@@ -68,13 +68,17 @@ void Particle::Set(double pos_x, double pos_y, double pos_z, double p1, double p
 
 
 
-const Coords& Particle::GetPosition()
+Coords& Particle::GetPosition()
 {    
     return position;
 }
 
+double Particle::GetPosition(int index)
+{    
+    return position[index];
+}
 
-const Momentum& Particle::GetMomentum()
+Momentum& Particle::GetMomentum()
 {
     return momentum;
 }

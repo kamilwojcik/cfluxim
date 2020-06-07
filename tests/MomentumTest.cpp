@@ -1,4 +1,5 @@
-#include "fluxsym.h"
+#include "../Momentum.h"
+#include "../Coords.h"
 #include <iostream>
 
 using namespace std;

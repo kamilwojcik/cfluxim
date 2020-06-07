@@ -13,9 +13,9 @@ void Momentum::SetCarthesian(double p_x, double p_y, double p_z)
     return;
 }
 
-void Momentum::SetPolar(double p_r, double p_phi, double p_theta)
+void Momentum::SetPolar(double p_r, double p_theta, double p_phi)
 {
-    polar.SetCoords(p_r, p_phi, p_theta);
+    polar.SetCoords(p_r, p_theta, p_phi);
     carthesian=polarToCarthesian(polar);
     
     return;
@@ -98,6 +98,7 @@ void Momentum::Print()
 Momentum::Momentum(double p1, double p2, double p3, eCoordinateSystem system)
 {
     polar.SetSystem(eCoordinateSystem::polar);
+    
     switch(system)
     {
         case eCoordinateSystem::polar:
