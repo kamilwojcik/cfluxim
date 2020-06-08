@@ -6,14 +6,14 @@
 
 enum class eCoordinateSystem
 {
-    polar = 0,
+    spherical = 0,
     carthesian = 1
 };
 
 class Coords
 {
         eCoordinateSystem coord_system;
-        double a1, a2, a3;   //in polar: r, phi, theta; in carthesian: x, y, z
+        double a1, a2, a3;   //in spherical: r, phi, theta; in carthesian: x, y, z
     
         void CheckRadius();
         
@@ -32,9 +32,9 @@ class Coords
         Coords(const Coords& instance_to_copy);
 };
 
-Coords polarToCarthesian(Coords polar);
+Coords sphericalToCarthesian(Coords spherical);
 
-Coords carthesianToPolar(Coords carthesian);
+Coords carthesianToSpherical(Coords carthesian);
 
 
 #endif

@@ -48,8 +48,8 @@ int main(void)
     {
         particle=pGen.GetRandomParticle();
         posXY.Fill(particle.GetPosition(0),particle.GetPosition(1));
-        theta.Fill(particle.GetMomentum().GetPolar()[1]);
-        phi.Fill(particle.GetMomentum().GetPolar()[2]);
+        theta.Fill(particle.GetMomentum().GetSpherical()[1]);
+        phi.Fill(particle.GetMomentum().GetSpherical()[2]);
     }
     
     TCanvas * cn=new TCanvas;

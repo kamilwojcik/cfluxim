@@ -8,15 +8,15 @@
 void Momentum::SetCarthesian(double p_x, double p_y, double p_z)
 {
     carthesian.SetCoords(p_x, p_y, p_z);
-    polar=carthesianToPolar(carthesian);
+    spherical=carthesianToSpherical(carthesian);
 
     return;
 }
 
-void Momentum::SetPolar(double p_r, double p_theta, double p_phi)
+void Momentum::SetSpherical(double p_r, double p_theta, double p_phi)
 {
-    polar.SetCoords(p_r, p_theta, p_phi);
-    carthesian=polarToCarthesian(polar);
+    spherical.SetCoords(p_r, p_theta, p_phi);
+    carthesian=sphericalToCarthesian(spherical);
     
     return;
 }
@@ -27,14 +27,14 @@ void Momentum::Set(Coords coords)
     
     switch(system)
     {
-        case eCoordinateSystem::polar:
-            polar=coords;
-            carthesian=polarToCarthesian(coords);
+        case eCoordinateSystem::spherical:
+            spherical=coords;
+            carthesian=sphericalToCarthesian(coords);
             break;
             
         case eCoordinateSystem::carthesian:
             carthesian=coords;
-            polar=carthesianToPolar(coords);
+            spherical=carthesianToSpherical(coords);
             break;
     }
     
@@ -53,24 +53,24 @@ Coords& Momentum::GetCarthesian()
     return carthesian;
 }
 
-Coords& Momentum::GetPolar()
+Coords& Momentum::GetSpherical()
 {
-    return polar;
+    return spherical;
 }
 
 double Momentum::GetMagnitude()
 {
-    return polar[0];
+    return spherical[0];
 }
 
 
 /////////////////////////////////////
 //print
 
-void Momentum::PrintPolar()
+void Momentum::PrintSpherical()
 {
     std::cout<<"Momentum ";
-    polar.Print();
+    spherical.Print();
     
     return;
 }
@@ -85,7 +85,7 @@ void Momentum::PrintCarthesian()
 
 void Momentum::Print()
 {
-    PrintPolar();
+    PrintSpherical();
     PrintCarthesian();
     
     return;
@@ -97,12 +97,12 @@ void Momentum::Print()
 
 Momentum::Momentum(double p1, double p2, double p3, eCoordinateSystem system)
 {
-    polar.SetSystem(eCoordinateSystem::polar);
+    spherical.SetSystem(eCoordinateSystem::spherical);
     
     switch(system)
     {
-        case eCoordinateSystem::polar:
-            SetPolar(p1, p2, p3);
+        case eCoordinateSystem::spherical:
+            SetSpherical(p1, p2, p3);
             break;
             
         case eCoordinateSystem::carthesian:
@@ -113,26 +113,26 @@ Momentum::Momentum(double p1, double p2, double p3, eCoordinateSystem system)
 
 Momentum::Momentum(Coords coords)
 {
-    polar.SetSystem(eCoordinateSystem::polar);
+    spherical.SetSystem(eCoordinateSystem::spherical);
     
     switch(coords.GetCoordinateSystem())
     {
-        case eCoordinateSystem::polar:
-            polar=coords;
-            carthesian=polarToCarthesian(coords);
+        case eCoordinateSystem::spherical:
+            spherical=coords;
+            carthesian=sphericalToCarthesian(coords);
             break;
             
         case eCoordinateSystem::carthesian:
             carthesian=coords;
-            polar.SetSystem(eCoordinateSystem::polar);
-            polar=carthesianToPolar(coords);
+            spherical.SetSystem(eCoordinateSystem::spherical);
+            spherical=carthesianToSpherical(coords);
             break;
     }
 }
 
 Momentum::Momentum(const Momentum& other)
 {
-        polar=other.polar;
+        spherical=other.spherical;
         carthesian=other.carthesian;
 }
 
@@ -143,7 +143,7 @@ Momentum::Momentum(const Momentum& other)
 
 Momentum& Momentum::operator=(Momentum& instance_to_copy)
 {
-    polar=instance_to_copy.polar;
+    spherical=instance_to_copy.spherical;
     carthesian=instance_to_copy.carthesian;
     
     return instance_to_copy;

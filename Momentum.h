@@ -7,19 +7,19 @@
 class Momentum
 {
         Coords carthesian;
-        Coords polar;
+        Coords spherical;
         
     public:    
         void SetCarthesian(double p_x, double p_y, double p_z);
-        void SetPolar(double p_mag, double p_phi, double p_theta);
+        void SetSpherical(double p_mag, double p_phi, double p_theta);
         void Set(Coords coords);
         
         
         Coords& GetCarthesian();
-        Coords& GetPolar();
+        Coords& GetSpherical();
         double GetMagnitude();
         
-        void PrintPolar();
+        void PrintSpherical();
         void PrintCarthesian();
         void Print();
         

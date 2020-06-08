@@ -33,7 +33,7 @@ void Particle::SetMomentum(Momentum& p)
 
 void Particle::SetMomentum(double p1, double p2, double p3, eCoordinateSystem system)
 {
-    system == eCoordinateSystem::polar ? momentum.SetPolar(p1,p2,p3) : momentum.SetCarthesian(p1,p2,p3);
+    system == eCoordinateSystem::spherical ? momentum.SetSpherical(p1,p2,p3) : momentum.SetCarthesian(p1,p2,p3);
     
     return;
 }

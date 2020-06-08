@@ -5,18 +5,18 @@
 /////////////////////////////////////////////
 //functions
 
-Coords polarToCarthesian(Coords polar)
+Coords sphericalToCarthesian(Coords spherical)
 {
     double x,y,z;
-    x = polar[0]*std::sin(polar[1])*std::cos(polar[2]);
-    y = polar[0]*std::sin(polar[1])*std::sin(polar[2]);
-    z = polar[0]*std::cos(polar[1]);
+    x = spherical[0]*std::sin(spherical[1])*std::cos(spherical[2]);
+    y = spherical[0]*std::sin(spherical[1])*std::sin(spherical[2]);
+    z = spherical[0]*std::cos(spherical[1]);
     
     Coords carthesian_coords(x,y,z);
     return carthesian_coords;
 }
 
-Coords carthesianToPolar(Coords carthesian)
+Coords carthesianToSpherical(Coords carthesian)
 {
     double r, theta, phi;
     r = std::sqrt( carthesian[0]*carthesian[0] + carthesian[1]*carthesian[1] + carthesian[2]*carthesian[2] );
@@ -25,8 +25,8 @@ Coords carthesianToPolar(Coords carthesian)
     
     if ( carthesian[0] == 0 && carthesian[1] == 0 && carthesian[2] == 0 ) theta=0;
     
-    Coords polar_coords(r, theta, phi, eCoordinateSystem::polar);
-    return polar_coords;
+    Coords spherical_coords(r, theta, phi, eCoordinateSystem::spherical);
+    return spherical_coords;
 }
 
 
@@ -37,7 +37,7 @@ Coords carthesianToPolar(Coords carthesian)
 
 void Coords::CheckRadius()
 {
-    if ( coord_system==eCoordinateSystem::polar )
+    if ( coord_system==eCoordinateSystem::spherical )
         if (a1<0)
         {
             std::cout<<"r must be positive! Setting r=0"<<std::endl;
@@ -83,8 +83,8 @@ void Coords::Print()
 {
     switch(coord_system)
     {
-        case eCoordinateSystem::polar:
-        std::cout<<"polar: r="<< a1 <<" theta="<<a2<<" (deg: "<< a2*180/PI <<")"<<" phi="<<a3<<" (deg: "<< a3*180/PI <<")"<<std::endl;
+        case eCoordinateSystem::spherical:
+        std::cout<<"spherical: r="<< a1 <<" theta="<<a2<<" (deg: "<< a2*180/PI <<")"<<" phi="<<a3<<" (deg: "<< a3*180/PI <<")"<<std::endl;
         break;
         
         case eCoordinateSystem::carthesian:
