@@ -31,6 +31,7 @@ int main(void)
     pGen.Print();
     
     ////////////////////////
+    cout<<"A warning should appear:"<<endl;
     pGen.GetParticle().GetPosition(3);
     
     /////////////////////////////////////
