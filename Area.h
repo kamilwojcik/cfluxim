@@ -35,13 +35,14 @@
 class Area
 {
     double A,B,C,D;
-    Coords upLeft, downRight;
+    Coords upLeft, downRight, normalVec;
     double surfaceArea;
     
     void CalculateSurfaceArea();
     
 public:
     bool SetArea(Coords UpLeft, Coords DownRight);
+    void SetNormalVecDirection(bool direction);
     
     Coords RelativeToAbsolute(Coords relative);
     Coords AbsoluteToRelative(Coords absolute);

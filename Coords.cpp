@@ -29,7 +29,16 @@ Coords carthesianToSpherical(Coords carthesian)
     return spherical_coords;
 }
 
-
+double scalarProduct(Coords v1, Coords v2)
+{
+    if ( v1.GetCoordinateSystem() != v2.GetCoordinateSystem() )
+    {
+        std::cout<<"WARNING!"<<std::endl;
+        std::cout<<"       Scalar product: coordinate system mismatch!"<<std::endl;
+    }
+    
+    return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
+}
 
 ///////////////////////////////////////////
 //class methods

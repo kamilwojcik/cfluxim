@@ -50,6 +50,18 @@ int main (int argc, char *argv[])
     
     eCoordinateSystem system = f.GetCoordinateSystem();
     if (system == eCoordinateSystem::spherical) cout<<"Spherical"<<endl;
+
+    cout<<"\nScalar product tests"<<endl;
+    Coords v1(-1,-2,0);
+    v1.Print();
+    Coords v2(5,-8,10);
+    v2.Print();
+    cout<<"v1 dot v2: "<<scalarProduct(v1,v2)<<endl;
+    cout<<"\n With coordinate system mismatch:"<<endl;
+    v2.SetSystem(eCoordinateSystem::spherical);
+    v1.Print();
+    v2.Print();
+    cout<<"v1 (carthesian) dot v2 (spherical): "<<scalarProduct(v1,v2)<<endl;
     
     return 0;
 }

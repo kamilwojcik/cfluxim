@@ -36,5 +36,7 @@ Coords sphericalToCarthesian(Coords spherical);
 
 Coords carthesianToSpherical(Coords carthesian);
 
+double scalarProduct(Coords v1, Coords v2);
+
 
 #endif
