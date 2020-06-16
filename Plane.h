@@ -18,6 +18,7 @@ public:
     void SetNormalVecDirection(bool direction); //you may change the normal vector direction
     
     double operator[](int index);
+    Plane operator=(Plane instance_to_copy);
     Coords GetNormalVector();
     
     void Print();

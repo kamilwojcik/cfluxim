@@ -59,6 +59,16 @@ double Plane::operator[](int index)
     }
 }
 
+Plane Plane::operator=(Plane instance_to_copy)
+{
+    A=instance_to_copy.A;
+    B=instance_to_copy.B;
+    C=instance_to_copy.C;
+    D=instance_to_copy.D;
+    normalVec=instance_to_copy.normalVec;
+    return instance_to_copy;
+}
+
 Coords Plane::GetNormalVector()
 {
     return normalVec;
