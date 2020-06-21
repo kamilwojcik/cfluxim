@@ -3,6 +3,7 @@
 #include "TH1D.h"
 #include "TH2D.h"
 #include "TCanvas.h"
+#include "TFile.h"
 
 #define PI 3.14159265
 
@@ -20,7 +21,13 @@ int main(void)
     
     pGen.GetRandomParticle();
     
-    pGen.OpenQuantileFile("hQuantile.root");
+    TFile * file= TFile::Open("hQuantile.root");
+    cout<<"OpenQuantileFile: "<<"hQuantile.root"<<endl;
+    file->Print();
+    
+    TH1D * quantileHisto= (TH1D*)file->Get("hMuMom");
+    
+    pGen.SetMomentumQuantileHisto(quantileHisto);
     pGen.Print();
     
     cout<<"\nLosowanie: \n"<<endl;
@@ -45,7 +52,7 @@ int main(void)
     Particle particle;
     
     
-    for (int i=0; i<10000; i++)
+    for (int i=0; i<100000; i++)
     {
         particle=pGen.GetRandomParticle();
         posXY.Fill(particle.GetPosition(0),particle.GetPosition(1));

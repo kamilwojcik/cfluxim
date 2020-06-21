@@ -32,8 +32,8 @@ public:
     //area dimenstions definition
     void SetAreaXYSize(double x=1, double y=1); // [meters]
     
-    Particle& GetRandomParticle();
-    Particle& GetParticle();
+    Particle& GetRandomParticle(); //generates new random particle. area position is relative rectangle position!
+    Particle& GetParticle(); //getting current particle
     
     void Print();
     

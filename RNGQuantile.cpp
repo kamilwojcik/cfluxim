@@ -17,13 +17,13 @@ void RNGQuantile::SetDescription(string descr)
 }
 
 
-void RNGQuantile::OpenQuantileFile(string filename)
+void RNGQuantile::SetMomentumQuantileHisto(TH1D * momQuantile)
 {
-    file= TFile::Open(filename.data());
-    cout<<"OpenQuantileFile: "<<filename.data()<<endl;
-    file->Print();
-    quantileHisto= (TH1D*)file->Get("hQuantile");
-    quantileHisto->Print();
+    //file= TFile::Open(filename.data());
+    //cout<<"OpenQuantileFile: "<<filename.data()<<endl;
+    //file->Print();
+    //quantileHisto= (TH1D*)file->Get("hQuantile");
+    quantileHisto = momQuantile;
     distributionHisto=new TH1D("distributionHisto","distributionHisto",quantileHisto->GetNbinsX(), quantileHisto->GetXaxis()->GetXmin(),quantileHisto->GetXaxis()->GetXmax());
     ready = true;
     
@@ -35,7 +35,7 @@ void RNGQuantile::SaveDistribution(std::string filename)
 {
     if (filename=="") filename= description+"_distribution.root";
     if (ready) distributionHisto->SaveAs(filename.data());
-    else cout<<"RNGwuantile not initialized! No distribution to save."<<endl;
+    else cout<<"RNGquantile not initialized! No distribution to save."<<endl;
     
     return;
 }
@@ -70,7 +70,7 @@ void RNGQuantile::ResetDistribution()
 double RNGQuantile::GetRandom()
 {
     double ans=0;
-    if (ready) ans=quantileHisto->GetBinCenter(quantileHisto->FindFirstBinAbove(rng->Rndm()));
+    if (ready) ans=quantileHisto->GetBinCenter(quantileHisto->FindLastBinAbove(rng->Rndm()));
     else cout<<"RNGQuantile not initialized!"<<endl;
     distributionHisto->Fill(ans);
     
@@ -105,11 +105,11 @@ RNGQuantile::RNGQuantile()
 }
 
 
-RNGQuantile::RNGQuantile(string filename, string descr)
+RNGQuantile::RNGQuantile(TH1D * momQuantile, string descr)
 {
     RNGQuantile();
     SetDescription(descr);
-    OpenQuantileFile(filename.data());
+    SetMomentumQuantileHisto(momQuantile);
 }
 
 
@@ -122,8 +122,6 @@ RNGQuantile::~RNGQuantile()
     {
         delete quantileHisto;
         delete distributionHisto;
-        file->Close();
-        delete file;
     }
     delete rng;
 }
