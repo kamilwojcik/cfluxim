@@ -55,7 +55,7 @@ void FluxList::CalculateNpps()
     //area "vertical component"
     double aver = area * sin( areaTheta );
     
-    for (double phi_i=phiMin+dPhi; phi_i<phiMax; phi_i+=dPhi)
+    for (double phi_i=phiMin+dPhi/2.; phi_i<phiMax; phi_i+=dPhi)
         for (int j=0; j<thetaNbins; j++)
         {
             npps_ij=fluxVsTheta->GetBinContent(j+1) * SolidAngle(thetaMin, thetaMin+dTheta, dPhi) * (ahor + aver*cos(phi_i - areaPhi)) * cos((thetaMin + j*dTheta) - areaTheta);
