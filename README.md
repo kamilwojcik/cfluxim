@@ -1,5 +1,6 @@
 # cfluxim
 A simple tool for generating cosmic ray particle flux regarding the given distributions of momentum angle and energy.
+NOT READY YET!
 
 ## What this tool can do
 
@@ -14,17 +15,13 @@ Output is a collection of particles with defined position and momentum vector, s
 
 ## Dependances
 
-A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern/) page.
+A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern/) website.
 
 ## Installation
 
-works fine on my computer ;)
-
-First, you need to install the [ROOT](https://root.cern.ch/downloading-root)
-
-## The tool will be finished ASAP ;)
-
+works fine on my computer ;) First, you need to install the [ROOT](https://root.cern.ch/downloading-root)
+just run compileCfluxim.sh
 
 ## License
 
-MIT.
+MIT
