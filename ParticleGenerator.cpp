@@ -17,7 +17,7 @@ void ParticleGenerator::RollTheDice()
     if (ready)
     {
         double r = RNGQuantile::GetRandom();
-        double theta = rng->Rndm()*(thetaMax-thetaMin)+thetaMin;
+        double theta = (rng->Rndm()*(thetaMax-thetaMin))+thetaMin;
         double phi = rng->Rndm()*(phiMax-phiMin)+phiMin;
         particle.SetMomentum(r, theta, phi);
     

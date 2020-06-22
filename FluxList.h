@@ -45,7 +45,7 @@ public:
     bool Recalculate();
     
     void Print();
-    void Save();
+    void Save(string NppsPhiTheta_name="NppsPhiTheta");
     
     FluxList();
     FluxList(TH1D * fluxh, double a=1, double aTheta=0, double aPhi=0, int id=0);

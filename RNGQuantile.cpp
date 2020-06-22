@@ -19,10 +19,6 @@ void RNGQuantile::SetDescription(string descr)
 
 void RNGQuantile::SetMomentumQuantileHisto(TH1D * momQuantile)
 {
-    //file= TFile::Open(filename.data());
-    //cout<<"OpenQuantileFile: "<<filename.data()<<endl;
-    //file->Print();
-    //quantileHisto= (TH1D*)file->Get("hQuantile");
     quantileHisto = momQuantile;
     distributionHisto=new TH1D("distributionHisto","distributionHisto",quantileHisto->GetNbinsX(), quantileHisto->GetXaxis()->GetXmin(),quantileHisto->GetXaxis()->GetXmax());
     ready = true;

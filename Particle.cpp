@@ -9,7 +9,7 @@
 //set
 
 
-void Particle::SetPosition(Coords& pos)
+void Particle::SetPosition(Coords pos)
 {
     position=pos;
     position.SetSystem(eCoordinateSystem::carthesian);
@@ -24,7 +24,7 @@ void Particle::SetPosition(double x, double y, double z)
     return;
 }
 
-void Particle::SetMomentum(Momentum& p)
+void Particle::SetMomentum(Momentum p)
 {
     momentum=p;
     
@@ -44,7 +44,7 @@ void Particle::SetPID(int id)
 
     return;
 }
-void Particle::Set(Coords& pos, Momentum& p, int id)
+void Particle::Set(Coords pos, Momentum p, int id)
 {
     SetPosition(pos);
     SetMomentum(p);
@@ -107,7 +107,7 @@ void Particle::Print()
 /////////////////////////////////////
 //constructors
 
-Particle::Particle(Coords& pos, Momentum& p, int id)
+Particle::Particle(Coords pos, Momentum p, int id)
 {
     Set(pos, p, id);
 }

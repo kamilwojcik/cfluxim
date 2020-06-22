@@ -74,22 +74,23 @@ Coords Rectangle::RelativeToAbsolute(Coords relative)
     Coords absolute;
     if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
     {
-        absolute.SetCoords( upLeft[0]+relative[0], upLeft[1]+relative[1], upLeft[2] );
+        absolute.SetCoords( upLeft[0]+relative[0], -upLeft[1]+relative[1], upLeft[2] );
+        //cout<<"-UpLeftY: "<<-upLeft[1]<<" -upLeft[1]+relative[1]: "<<-upLeft[1]+relative[1]<<" relativeY: "<<relative[1]<<endl;
     }
     else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
     {
-        absolute.SetCoords( upLeft[0]+relative[0], upLeft[1], upLeft[2]+relative[1] );
+        absolute.SetCoords( upLeft[0]+relative[0], -upLeft[1], upLeft[2]+relative[1] );
     }
     else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
     {
-        absolute.SetCoords( upLeft[0], upLeft[1]+relative[0], upLeft[2]+relative[1] );
+        absolute.SetCoords( upLeft[0], -upLeft[1]+relative[0], upLeft[2]+relative[1] );
     }
     
     return absolute;
 }
 
 
-Coords Rectangle::AbsoluteToRelative(Coords absolute)
+Coords Rectangle::AbsoluteToRelative(Coords absolute) /////////WRONG! To be corrected.
 {
     Coords relative;
     if ( plane[0] == 0 and plane[1] == 0 ) //XY plane

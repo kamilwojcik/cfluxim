@@ -12,6 +12,9 @@ Coords sphericalToCarthesian(Coords spherical)
     y = spherical[0]*std::sin(spherical[1])*std::sin(spherical[2]);
     z = spherical[0]*std::cos(spherical[1]);
     
+    //std::cout<<"r="<<spherical[0]<<" phi="<<spherical[1]<<" theta="<<spherical[2]<<std::endl;
+    //std::cout<<"x="<<x<<" y="<<y<<" z="<<z<<std::endl;
+    
     Coords carthesian_coords(x,y,z);
     return carthesian_coords;
 }

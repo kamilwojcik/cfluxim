@@ -5,6 +5,7 @@
 #include "TCanvas.h"
 #include <cmath>
 #include <iostream>
+#include <string>
 
 #define PItimes2 6.2831853
 #define PIover2 1.5707963
@@ -26,15 +27,15 @@ void FluxList::CalculateNpps()
     int phiNbins;
     double phiMin, phiMax;
     
-    if (areaTheta == 0 or areaTheta == PI)
+    if (areaTheta == 0 )
     {
-        phiNbins=36;
+        phiNbins=72; //72 5-degree intervals
         phiMin=areaPhi-PI;
         phiMax=areaPhi+PI;
     }
     else
     {
-        phiNbins=18;
+        phiNbins=36; //36 5-degree intervals
         phiMin = areaPhi - PIover2;
         phiMax = areaPhi + PIover2;
     }
@@ -43,22 +44,24 @@ void FluxList::CalculateNpps()
     double dTheta = fluxVsTheta->GetBinWidth(1);
     
     int thetaNbins=fluxVsTheta->GetNbinsX();
-    
-    cout<<"PhiMin="<<phiMin<<endl;
-    
+        
     double npps_ij;
-    cout<<"Mark!"<<endl;
     NppsPhiTheta = new TH2D("NppsPhiTheta", "NppsPhiTheta",phiNbins, phiMin, phiMax, thetaNbins, 0, PIover2);
     NppsPhiTheta->GetXaxis()->SetTitle("phi [rad]");
     NppsPhiTheta->GetYaxis()->SetTitle("theta [rad]");
     
-    for (double phi_i=phiMin; phi_i<phiMax; phi_i+=dPhi)
-        for (int j=1; j<=thetaNbins; j++)
+    //area "horizobtal component"
+    double ahor = area * cos( areaTheta );
+    //area "vertical component"
+    double aver = area * sin( areaTheta );
+    
+    for (double phi_i=phiMin+dPhi; phi_i<phiMax; phi_i+=dPhi)
+        for (int j=0; j<thetaNbins; j++)
         {
-            cout<<"phi_i: "<<phi_i<<"  j: "<<j<<endl;
-            npps_ij=fluxVsTheta->GetBinContent(j) * SolidAngle(thetaMin, thetaMin+dTheta, dPhi) * area * cos((thetaMin + j*dTheta) - areaTheta) * cos(phi_i - areaPhi);
-            NppsPhiTheta->Fill(phi_i, thetaMin + (j-1)*dTheta , npps_ij);
+            npps_ij=fluxVsTheta->GetBinContent(j+1) * SolidAngle(thetaMin, thetaMin+dTheta, dPhi) * (ahor + aver*cos(phi_i - areaPhi)) * cos((thetaMin + j*dTheta) - areaTheta);
+            NppsPhiTheta->Fill(phi_i, thetaMin + j*dTheta , npps_ij);
         }
+    
     recalcNeeded=false;
     
     return;
@@ -135,15 +138,20 @@ void FluxList::Print()
 }
 
 
-void FluxList::Save()
+void FluxList::Save(string NppsPhiTheta_name)
 {
-    NppsPhiTheta->SaveAs("NppsPhiTheta.root");
+    NppsPhiTheta->SaveAs((NppsPhiTheta_name+".root").c_str());
     TCanvas *cnv = new TCanvas();
     cnv->cd();
     NppsPhiTheta->Draw("Colz");
-    cnv->SaveAs("NppsPhiTheta.png");
+    cnv->SaveAs((NppsPhiTheta_name+".png").c_str());
     delete cnv;
     return;
+}
+
+TH2D * FluxList::GetNppsPhiTheta()
+{
+    return NppsPhiTheta;
 }
 
 FluxList::FluxList()

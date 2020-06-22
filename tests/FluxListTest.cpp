@@ -20,7 +20,7 @@ int main(void)
     TH1D * uFlux = (TH1D*)file->Get("uFluxTheta");
     
     flst.SetFluxVsThetaHisto(uFlux);
-    flst.SetArea(1,1.571,0.5);
+    flst.SetArea(1,1.571,0);
     flst.Print();
     flst.Recalculate();
     flst.Print();
