@@ -1,25 +1,22 @@
 # cfluxim
 A simple tool for generating cosmic ray particle flux regarding the given distributions of momentum angle and energy.
-NOT READY YET!
 
-## What this tool can do
+## More precysely
 
-It calculates the number of cosmic ray particles coming from a given solid angle and passing through a surface or a cube, regarding the zenith angle.
+the program generates cosmic ray muons that tasses through the cube of given edge length, in a given time.
 
-The momentum magnitude is randomly generated using cumulative distribution historgam. The angular momentum coordinates are generated randomly within a given range.
+Other kinds of particles can be defined and calculated separately - you will need to prepare two input histograms: momentum distribution and flux intensity vs zenith angle.
 
-Each kind of particles can be defined and calculated separately.
-
-Output is a collection of particles with defined position and momentum vector, saved as a root tree.
+Output is a collection of particles with defined position and momentum vector, saved in a ROOT TTree.
 (see: [TTree class reference](https://root.cern.ch/doc/master/classTTree.html)
 
-## Dependances
+## Dependencies
 
 A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern/) website.
 
 ## Installation
 
-works fine on my computer ;) First, you need to install the [ROOT](https://root.cern.ch/downloading-root)
+works fine on my computer ;) First, you need to install the [ROOT](https://root.cern.ch/downloading-root) framework. Then,
 just run compileCfluxim.sh
 
 ## License
