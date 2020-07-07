@@ -63,12 +63,12 @@ bool Rectangle::SetRectangle(Coords & ULeft, Coords & DRight)
         return CalculateEdgesAndPlane();        
 }
 
-
-void Rectangle::SetNormalVecDirection(bool direction)
+/*
+void Rectangle::ChangeNormalVecDirection(bool direction)
 {
     plane.SetNormalVecDirection(direction);
 }
-
+*/
 Coords Rectangle::RelativeToAbsolute(Coords relative)
 {
     Coords absolute;
@@ -90,27 +90,27 @@ Coords Rectangle::RelativeToAbsolute(Coords relative)
 }
 
 
-Coords Rectangle::AbsoluteToRelative(Coords absolute) /////////WRONG! To be corrected.
+Coords Rectangle::AbsoluteToRelative(Coords absolute)
 {
     Coords relative;
     if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
     {
-        relative.SetCoords( absolute[0]-upLeft[0], absolute[1]-upLeft[1], 0);
+        relative.SetCoords( absolute[0]-upLeft[0], upLeft[1]-absolute[1], 0);
     }
     else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
     {
-        relative.SetCoords( absolute[0]-upLeft[0], absolute[2]-upLeft[2], 0);
+        relative.SetCoords( absolute[0]-upLeft[0], upLeft[2]-absolute[2], 0);
     }
     else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
     {
-        relative.SetCoords( absolute[1]-upLeft[1], absolute[2]-upLeft[2], 0);
+        relative.SetCoords( absolute[1]-upLeft[1], upLeft[2]-absolute[2], 0);
     }
     
     return relative;
 }
 
 
-Momentum Rectangle::VecToRelative(Momentum absolute)
+Momentum Rectangle::VecToRelative(Momentum absolute) //not testes
 {
     Momentum relative;
     if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
@@ -129,7 +129,7 @@ Momentum Rectangle::VecToRelative(Momentum absolute)
     return relative;
 }
 
-Momentum Rectangle::VecToAbsolute(Momentum relative)
+Momentum Rectangle::VecToAbsolute(Momentum relative) //not tested
 {
     Momentum absolute;
     if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
@@ -179,29 +179,11 @@ bool Rectangle::HitsRectangle(Particle particle)
 {
     bool ans = false;
         
-    if ( scalarProduct( particle.GetMomentum().GetCarthesian(), plane.GetNormalVector() ) != 0 )
+    if ( plane.HitsPlane(particle) )
     {
-        double posX, posY, posZ, pX, pY, pZ, A, B, C, D;
-        double hitX, hitY, hitZ;
-        A=plane[0];
-        B=plane[1];
-        C=plane[2];
-        D=plane[3];
-        posX=particle.GetPosition()[0];
-        posY=particle.GetPosition()[1];
-        posZ=particle.GetPosition()[2];
-        pX=particle.GetMomentum().GetCarthesian()[0];
-        pY=particle.GetMomentum().GetCarthesian()[1];
-        pZ=particle.GetMomentum().GetCarthesian()[2];
-        double t= ( A*posX + B*posY + C*posZ + D ) / ( A*pX + B*pY + C*pZ );
-        
-        hitX= posX + t*pX;
-        hitY= posY + t*pY;
-        hitZ= posZ + t*pZ;
-
-        hitPosition.SetCoords(hitX, hitY, hitX);
+        hitPosition = plane.GetHitPosition(particle);
         hitRelative = AbsoluteToRelative(hitPosition);
-        if (hitRelative[0] <= edge1 && hitRelative[1] <= edge2) ans = true;
+        if (hitRelative[0] <= edge1 && hitRelative[0] >= 0 && hitRelative[1] <= edge2 && hitRelative[1] >= 0) ans = true;
     }
     return ans;
 }

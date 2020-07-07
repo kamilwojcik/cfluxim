@@ -27,6 +27,10 @@ class Coords
         
         double operator[](int index);
         Coords operator=(Coords instance_to_copy);
+        Coords operator+(Coords to_add);
+        Coords operator-();
+        Coords operator-(Coords to_substract);
+        Coords operator*(double scalar);
     
         Coords(double x=0, double y=0, double z=0, eCoordinateSystem system  = eCoordinateSystem::carthesian);
         Coords(const Coords& instance_to_copy);
@@ -36,7 +40,17 @@ Coords sphericalToCarthesian(Coords spherical);
 
 Coords carthesianToSpherical(Coords carthesian);
 
-double scalarProduct(Coords v1, Coords v2);
+double scalarProduct(Coords v1, Coords v2); //or dot procuct
+
+Coords vectorProduct(Coords v1, Coords v2); //or cross product
+
+double tripleProduct(Coords v1, Coords v2, Coords v3);
+
+double norm(Coords v1);
+
+double distance(Coords p1, Coords p2);
+
+Coords operator*(double scalar, Coords vector);
 
 
 #endif

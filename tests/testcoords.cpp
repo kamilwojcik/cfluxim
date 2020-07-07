@@ -63,5 +63,81 @@ int main (int argc, char *argv[])
     v2.Print();
     cout<<"v1 (carthesian) dot v2 (spherical): "<<scalarProduct(v1,v2)<<endl;
     
+    cout<<"\nvector product v3 of v1 and v2 (carthesian again)"<<endl;
+    v2.SetSystem(eCoordinateSystem::carthesian);
+    Coords v3=vectorProduct(v1,v2);
+    v3.Print();
+    
+    cout<<"\nTriple product: "<<tripleProduct(v1,v2,v3)<<endl;
+    
+    
+    cout<<"\nDistance between p1=(1,-3,0) and p2=(-9,8,5):"<<endl;
+    Coords p1(1,-3,0);
+    Coords p2(-9,8,5);
+    cout<<distance(p1,p2)<<"\nand distance between p2 and p1: "<<distance(p2,p1)<<endl;
+    
+    Coords minus_p1=-p1;
+    cout<<"\n-p1: "<<endl;
+    minus_p1.Print();
+    
+    Coords p1p2=p1+p2;
+    cout<<"p1 + p2: "<<endl;
+    p1p2.Print();
+    
+    Coords p1_minus_p2 = p1-p2;
+    cout<<"p1 - p2: "<<endl;
+    p1_minus_p2.Print();
+    
+    cout<<"\nThe same in spherical:"<<endl;
+    Coords p1s=carthesianToSpherical(p1);
+    Coords p2s=carthesianToSpherical(p2);
+    cout<<"p1s is p1 in spherical: "<<endl;
+    p1s.Print();
+    cout<<"p2s is p2 in spherical: "<<endl;
+    p2s.Print();
+    cout<<"p2s to carthesian "<<endl;
+    sphericalToCarthesian(p2s).Print();
+    cout<<"-p2s"<<endl;
+    (-p2s).Print();
+    cout<<"-p2s to carthesian: "<<endl;
+    sphericalToCarthesian(-p2s).Print();
+    
+    
+    
+    Coords minus_p1s=-p1s;
+    cout<<"\n-p1s: "<<endl;
+    minus_p1s.Print();
+    
+    cout<<"\np1s + p2 - system mismatch"<<endl;
+    (p1s+p2).Print();
+    
+    cout<<"p1 + p2s - system mismatch"<<endl;
+    (p1+p2s).Print();
+    
+    cout<<"\np1s + p2s"<<endl;
+    (p1s+p2s).Print();
+    cout<<"p1s + p2s in carthesian:"<<endl;
+    sphericalToCarthesian(p1s+p2s).Print();
+    
+    cout<<"\np1s - p2s"<<endl;
+    (p1s-p2s).Print();
+    cout<<"p1s - p2s in carthesian:"<<endl;
+    sphericalToCarthesian(p1s-p2s).Print();
+    
+    cout<<"\nMultiplying by a scalar"<<endl;
+    cout<<"p1: ";
+    p1.Print();
+    cout<<"p1*2: ";
+    (p1*2.).Print();
+    cout<<"2*p1: ";
+    (2*p1).Print();
+    
+    cout<<"\np1s: ";
+    p1s.Print();
+    cout<<"p1*2: ";
+    (p1s*2.).Print();
+    
+    
+    
     return 0;
 }

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "../Coords.h"
 #include "../Plane.h"
+#include "../Particle.h"
+#include "../Momentum.h"
 
 using namespace std;
 
@@ -15,10 +17,13 @@ int main (int argc, char *argv[])
     P.Print();
     
     cout<<"\nChanging normal vector direction for M:"<<endl;
-    M.SetNormalVecDirection(false);
+    M.ChangeNormalVecDirection();
     M.Print();
+    cout<<"\nGet normal vector of M:"<<endl;
+    M.GetNormalVector().Print();
     
-    cout<<"Scalar products of normal vectors:"<<endl;
+    
+    cout<<"\nScalar products of normal vectors:"<<endl;
     cout<<"Plane N:"<<endl;
     Plane N(1,2,2.5,4);
     N.Print();
@@ -37,6 +42,17 @@ int main (int argc, char *argv[])
     point.SetCoords(3.14,64,0);
     point.Print();
     cout<<"Belongs to P? Answer: "<<P.BelongsToPlane(point)<<endl;
+    
+    Particle part(0,0,5,1/2.,1/2,5,0,eCoordinateSystem::carthesian);
+    Plane Pi(0,0,1,2);
+    cout<<"Testing particle hit position\nPlane:"<<endl;
+    Pi.Print();
+    cout<<"\nParticle:\n"<<endl;
+    part.Print();
+    
+    cout<<"Does the particle hit the plane? "<<Pi.HitsPlane(part)<<"\nHit position:"<<endl;
+    point=Pi.GetHitPosition(part);
+    point.Print();
     
     
     

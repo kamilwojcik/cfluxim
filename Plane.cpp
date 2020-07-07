@@ -1,5 +1,7 @@
 #include "Plane.h"
 #include "Coords.h"
+#include "Particle.h"
+#include "Momentum.h"
 
 #include <iostream>
 
@@ -26,18 +28,26 @@ void Plane::SetPlane(double a, double b, double c, double d)
         B=b;
         C=c;
         D=d;
-        SetNormalVecDirection(true);
     }
-    else cout<<"Bad plane definition! Setting default: z = 0"<<endl;
-        
+    else
+    {
+        cout<<"Bad plane definition! Setting default: z = 0"<<endl;
+        A=0;
+        B=0;
+        C=1;
+        D=0;
+    }
     return;
 }
 
 
-void Plane::SetNormalVecDirection(bool direction)
+void Plane::ChangeNormalVecDirection()
 {
-    if (direction) normalVec.SetCoords(A, B, C);
-    else normalVec.SetCoords(-A, -B, -C);
+    
+    A = -A;
+    B = -B;
+    C = -C;
+    D = -D;
 
     return;
 }
@@ -45,6 +55,11 @@ void Plane::SetNormalVecDirection(bool direction)
 /////////////////////////
 //get
 
+Coords Plane::GetNormalVector()
+{
+    Coords normalVec(A,B,C);
+    return normalVec;
+}
 
 double Plane::operator[](int index)
 {
@@ -59,20 +74,38 @@ double Plane::operator[](int index)
     }
 }
 
+bool Plane::HitsPlane(Particle particle)
+{
+    return scalarProduct( particle.GetMomentum().GetCarthesian(), GetNormalVector()) != 0;
+}
+
+
+Coords Plane::GetHitPosition(Particle particle)
+{
+    Coords hitPosition;
+    
+    if (HitsPlane(particle))
+    {
+        Coords position = particle.GetPosition();
+        Coords momentum = particle.GetMomentum().GetCarthesian();
+        
+        double t = - ( scalarProduct(GetNormalVector(), position) + D ) / scalarProduct (GetNormalVector(), momentum);
+        
+        hitPosition = position + momentum*t;
+    }
+    return hitPosition;
+}
+
+
 Plane Plane::operator=(Plane instance_to_copy)
 {
     A=instance_to_copy.A;
     B=instance_to_copy.B;
     C=instance_to_copy.C;
     D=instance_to_copy.D;
-    normalVec=instance_to_copy.normalVec;
     return instance_to_copy;
 }
 
-Coords Plane::GetNormalVector()
-{
-    return normalVec;
-}
 
 ///////////////////////////
 //print
@@ -81,7 +114,7 @@ void Plane::Print()
 {
     cout<<"Plane: "<<A<<"x + "<<B<<"y + "<<C<<"z + "<<D<<" = 0"<<endl;
     cout<<"Normal vector: ";
-    normalVec.Print();
+    GetNormalVector().Print();
     
     return;
 }
@@ -92,20 +125,13 @@ void Plane::Print()
 //other
 bool Plane::BelongsToPlane(Coords point)
 {
-    return A*point[0] + B*point[1] + C*point[2] + D == 0;
+    return scalarProduct(GetNormalVector(), point) + D == 0;
 }
 
 ///////////////////////////
 //constructors
 
-Plane::Plane()
+Plane::Plane(double a, double b, double c, double d)
 {
-    SetPlane();
-}
-
-Plane::Plane(double a, double b, double c, double d, bool direction)
-{
-    SetPlane(); //initializes with defaults;
-    SetPlane(a,b,c,d); //if definition ok -> setting the plane
-    SetNormalVecDirection(direction);
+    SetPlane(a,b,c,d);
 }

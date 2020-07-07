@@ -2,20 +2,20 @@
 #define PLANE_H
 
 #include "Coords.h"
-
+#include "Particle.h"
+#include "Momentum.h"
 
 
 class Plane
 {
     double A,B,C,D;
-    Coords normalVec;
     
     bool IsDefinitionGood(double, double, double, double);
     
 public:
     
-    void SetPlane(double a=0, double b=0, double c=1, double d=0); //XY by default
-    void SetNormalVecDirection(bool direction); //you may change the normal vector direction
+    void SetPlane(double a, double b, double c, double d); 
+    void ChangeNormalVecDirection();
     
     double operator[](int index);
     Plane operator=(Plane instance_to_copy);
@@ -23,10 +23,11 @@ public:
     
     void Print();
     
-    Plane();
-    Plane(double a, double b, double c, double d, bool direction = true);
+    Plane(double a=0, double b=0, double c=1, double d=0); //XY by default
     
     bool BelongsToPlane(Coords point);
+    bool HitsPlane(Particle particle);
+    Coords GetHitPosition(Particle particle);
 };
 
 #endif

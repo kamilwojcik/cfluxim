@@ -66,8 +66,6 @@ void Particle::Set(double pos_x, double pos_y, double pos_z, double p1, double p
 //Get
 
 
-
-
 Coords& Particle::GetPosition()
 {    
     return position;

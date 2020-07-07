@@ -44,7 +44,7 @@ class Rectangle
 public:
     void SetDefault();
     bool SetRectangle(Coords & UpLeft, Coords & DownRight);
-    void SetNormalVecDirection(bool direction);
+    //void SetNormalVecDirection(bool direction);
     
     Coords RelativeToAbsolute(Coords relative);
     Coords AbsoluteToRelative(Coords absolute);
@@ -56,7 +56,7 @@ public:
     Coords GetDownRight();
     Plane  GetPlane();
     
-    Coords GetHitPosition();
+    Coords GetHitPosition(); //returns absolute hit position
     bool HitsRectangle(Particle particle);
     
     Rectangle operator=(Rectangle instance_to_copy);
