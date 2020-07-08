@@ -15,6 +15,7 @@ class Plane
 public:
     
     void SetPlane(double a, double b, double c, double d); 
+    void SetPlane(Coords & normalVector, Coords & point);
     void ChangeNormalVecDirection();
     
     double operator[](int index);
@@ -24,6 +25,7 @@ public:
     void Print();
     
     Plane(double a=0, double b=0, double c=1, double d=0); //XY by default
+    Plane(Coords & normalVector, Coords & point);
     
     bool BelongsToPlane(Coords point);
     bool HitsPlane(Particle particle);

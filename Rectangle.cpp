@@ -10,8 +10,10 @@ using namespace std;
 
 void Rectangle::SetDefault()
 {
-    upLeft.SetCoords(-0.5,0.5,0);
-    downRight.SetCoords(0.5,-0.5,0);
+    v1.SetCoords(-0.5,0.5,0);
+    v2.SetCoords(0.5,0.5,0);
+    v3.SetCoords(0.5,-0.5,0);
+    v4.SetCoords(-0.5,-0.5,0);
     CalculateEdgesAndPlane();
     return;
 }
@@ -19,133 +21,60 @@ void Rectangle::SetDefault()
 bool Rectangle::CalculateEdgesAndPlane()
 {
     bool success=true;
-    double A,B,C,D;
-    if ( upLeft[2] == downRight[2] and upLeft[0] != downRight[0] and upLeft[1] != downRight[1] ) //XY plane
-    {
-        edge1 = downRight[0] - upLeft[0]; //dx
-        edge2 = upLeft[1] - downRight[1]; //dy
-        A=B=0;
-        C=1;
-        D=-upLeft[2];
-    }
-    else if ( upLeft[1] == downRight[1] and upLeft[0] != downRight[0] and upLeft[2] != downRight[2] ) //XZ plane
-    {
-        edge1 = downRight[0] - upLeft[0]; //dx
-        edge2 = upLeft[2] - downRight[2]; //dz
-        A=C=0;
-        B=1;
-        D=-upLeft[1];
-    }
-    else if ( upLeft[0] == downRight[0] and upLeft[1] != downRight[1] and upLeft[2] != downRight[2] ) //YZ plane
-    {
-        edge1 = downRight[1] - upLeft[1]; //dy
-        edge2 = upLeft[2] - downRight[2]; //dz
-        B=C=0;
-        A=1;
-        D=-upLeft[0];
-    }
-    else
+    Coords normalVec=vectorProduct(v4-v1, v2-v1);
+    plane.SetPlane(normalVec, v1);
+    
+    if ( !plane.BelongsToPlane(v2) || !plane.BelongsToPlane(v3) || !plane.BelongsToPlane(v4) )
     {
         cout<<"Warning: unsupported plane!"<<endl;
         success=false;
     }
-    surfaceArea = abs( edge1*edge2 );
-    plane.SetPlane(A,B,C,D);
+    
+    edge1=distance(v1,v2);
+    edge2=distance(v2,v3);
+    
+    if ( edge1 != distance(v4,v3) && edge2 != distance(v1, v4) )
+    {
+        cout<<"Warning: not a rectangle!"<<endl;
+        success=false;
+    }
+    
+    surfaceArea = edge1*edge2;
     
     return success;
 }
 
 
-bool Rectangle::SetRectangle(Coords & ULeft, Coords & DRight)
+bool Rectangle::SetRectangle(Coords & vertice1, Coords & vertice2, Coords & vertice3, Coords & vertice4)
 {
-        upLeft=ULeft;
-        downRight=DRight;
-        return CalculateEdgesAndPlane();        
+        v1=vertice1;
+        v2=vertice2;
+        v3=vertice3;
+        v4=vertice4;
+        bool ans = CalculateEdgesAndPlane();
+        if (!ans) SetDefault();
+        return ans;
 }
 
-/*
-void Rectangle::ChangeNormalVecDirection(bool direction)
+
+void Rectangle::ChangeNormalVecDirection()
 {
-    plane.SetNormalVecDirection(direction);
+    plane.ChangeNormalVecDirection();
+    return;
 }
-*/
+
+
 Coords Rectangle::RelativeToAbsolute(Coords relative)
 {
-    Coords absolute;
-    if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
-    {
-        absolute.SetCoords( upLeft[0]+relative[0], upLeft[1]-edge2+relative[1], upLeft[2] );
-    }
-    
-    else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
-    {
-        absolute.SetCoords( upLeft[0]+relative[0], upLeft[1], upLeft[2]-edge2+relative[1] );
-    }
-    else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
-    {
-        absolute.SetCoords( upLeft[0], upLeft[1]+relative[0], upLeft[2]-edge2+relative[1] );
-    }
-    
+    Coords absolute = v1 + relative[0]/edge1*(v2-v1) + relative[1]/edge2*(v4-v1); //v1 + relative[0]/edge1*(v2-v1) + relative[1]/edge2*(v4-v1);
     return absolute;
 }
 
 
 Coords Rectangle::AbsoluteToRelative(Coords absolute)
 {
-    Coords relative;
-    if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
-    {
-        relative.SetCoords( absolute[0]-upLeft[0], upLeft[1]-absolute[1], 0);
-    }
-    else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
-    {
-        relative.SetCoords( absolute[0]-upLeft[0], upLeft[2]-absolute[2], 0);
-    }
-    else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
-    {
-        relative.SetCoords( absolute[1]-upLeft[1], upLeft[2]-absolute[2], 0);
-    }
-    
+    Coords relative(scalarProduct((1./edge1)*(v2-v1),absolute-v1), scalarProduct((1./edge2)*(v4-v1),absolute-v1), 0); 
     return relative;
-}
-
-
-Momentum Rectangle::VecToRelative(Momentum absolute) //not testes
-{
-    Momentum relative;
-    if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
-    {
-        relative=absolute;
-    }
-    else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
-    {
-        relative.SetCarthesian( absolute.GetCarthesian()[0] , absolute.GetCarthesian()[2], -absolute.GetCarthesian()[1] );
-    }
-    else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
-    {
-        relative.SetCarthesian( -absolute.GetCarthesian()[2] , absolute.GetCarthesian()[1], absolute.GetCarthesian()[0] );
-    }
-    
-    return relative;
-}
-
-Momentum Rectangle::VecToAbsolute(Momentum relative) //not tested
-{
-    Momentum absolute;
-    if ( plane[0] == 0 and plane[1] == 0 ) //XY plane
-    {
-        absolute=relative;
-    }
-    else if ( plane[0] == 0 and plane[2] == 0 ) //XZ plane
-    {
-        absolute.SetCarthesian( relative.GetCarthesian()[0] , -relative.GetCarthesian()[2], relative.GetCarthesian()[1] );
-    }
-    else if ( plane[1] == 0 and plane[2] == 0 ) //YZ plane
-    {
-        absolute.SetCarthesian( relative.GetCarthesian()[2] , relative.GetCarthesian()[1], -relative.GetCarthesian()[0] );
-    }
-    
-    return absolute;
 }
 
     
@@ -154,15 +83,19 @@ double Rectangle::GetSurfaceArea()
     return surfaceArea;
 }
 
-Coords Rectangle::GetUpLeft()
+Coords Rectangle::GetVertice(int index)
 {
-    return upLeft;
+    if (index == 1) return v1;
+    else if (index == 2) return v2;
+    else if (index == 3) return v3;
+    else if (index == 4) return v4;
+    else
+    {
+        cout<<"GetVertice warning: index out of range!"<<endl;
+        return v1;
+    }
 }
 
-Coords Rectangle::GetDownRight()
-{
-    return downRight;
-}
 
 Plane Rectangle::GetPlane()
 {
@@ -182,35 +115,40 @@ bool Rectangle::HitsRectangle(Particle particle)
     if ( plane.HitsPlane(particle) )
     {
         hitPosition = plane.GetHitPosition(particle);
-        hitRelative = AbsoluteToRelative(hitPosition);
-        if (hitRelative[0] <= edge1 && hitRelative[0] >= 0 && hitRelative[1] <= edge2 && hitRelative[1] >= 0) ans = true;
+        double diameter = distance(v1,v3);
+        
+        if ( distance(hitPosition, v1)<=diameter && distance(hitPosition, v2)<=diameter && distance(hitPosition, v3)<=diameter && distance(hitPosition, v4)<=diameter ) ans = true;
     }
     return ans;
 }
 
 Rectangle Rectangle::operator=(Rectangle instance_to_copy)
 {
-    plane=instance_to_copy.plane;
-    upLeft=instance_to_copy.upLeft;
-    downRight=instance_to_copy.downRight;
-    surfaceArea=instance_to_copy.surfaceArea;
+    plane = instance_to_copy.plane;
+    v1 = instance_to_copy.v1;
+    v2 = instance_to_copy.v2;
+    v3 = instance_to_copy.v3;
+    v4 = instance_to_copy.v4;
+    surfaceArea = instance_to_copy.surfaceArea;
+    edge1 = instance_to_copy.edge1;
+    edge2 = instance_to_copy.edge2;
     return instance_to_copy;
 }
 
 void Rectangle::Print()
 {
     
-    cout<<"Rectangle in ";
-    if ( plane[0] == 0 and plane[1] == 0 ) cout<<"XY plane"<<endl;
-    else if ( plane[0] == 0 and plane[2] == 0 ) cout<<"XZ plane"<<endl;
-    else if ( plane[1] == 0 and plane[2] == 0 ) cout<<"YZ plane"<<endl;
-    else cout<<"[error: unsupported] plane"<<endl;
-    cout<<"upLeft: ";
-    upLeft.Print();
-    cout<<"downRight:";
-    downRight.Print();
-    cout<<"Edge1: "<<edge1<<"  edge2: "<<edge2<<"  surface area: "<<surfaceArea<<endl;
+    cout<<"Rectangle in plane:"<<endl;
     plane.Print();
+    cout<<"vertice 1: ";
+    v1.Print();
+    cout<<"vertice 2: ";
+    v2.Print();
+    cout<<"vertice 3: ";
+    v3.Print();
+    cout<<"vertice 4: ";
+    v4.Print();
+    cout<<"Edge1: "<<edge1<<"  edge2: "<<edge2<<"  surface area: "<<surfaceArea<<endl;
     
     return;
 }
@@ -220,7 +158,7 @@ Rectangle::Rectangle()
     SetDefault();
 }
 
-Rectangle::Rectangle(Coords & ULeft, Coords & DRight)
+Rectangle::Rectangle(Coords & vertice1, Coords & vertice2, Coords & vertice3, Coords & vertice4)
 {
-    SetRectangle(ULeft, DRight);
+    SetRectangle(vertice1, vertice2, vertice3, vertice4);
 }

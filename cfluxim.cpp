@@ -24,38 +24,38 @@
 /////////////////////////////////////////////
 // CUBE particle generator
 //
-// Cube size: 4x4x4 m
+// Cube size: 8x8x8 m
 //
 // UP:
 //                      Y  ^ 
-//                         | wall2
-//  p2up(-2,2,4) __________|__________ p1up(2,2,4)
+//                         | wall1
+//  p1up(-4,4,8) __________|__________ p2up(4,4,8)
 //              |          |          |
 //              |          |          |
-//        wall3 |  ceiling |          | wall1
+//        wall4 |  ceiling |          | wall2
 //              |          |Z         |
 //           ---|----------+----------|--->
 //              |          |          |   X
 //              |          |          |
 //              |          |          |
 //              |__________|__________|
-// p3up(-2,-2,4)           | wall4     p4up(2,-2,4)
+// p4up(-4,-4,8)           | wall3     p3up(4,-4,8)
 //                         |
 //
 //
 // SIDE:
 //                      Z  ^      
 //                         | ceiling
-//  p4up(2,-2,4) __________|__________ p1up(2,2,4)
+//  p3up(4,-4,8) __________|__________ p2up(4,4,8)
 //              |          |          |
 //              |          |          |
 //              |          |          |
-//        wall4 |    wall1 |          | wall2
+//        wall3 |    wall2 |          | wall1
 //              |          |          |
 //              |          |          |
 //              |          |          |
 //          ____|__________|__________|_____> Y
-//  p4down(2,-2,0)         X           p1down(2,2,0)
+//  p3down(4,-4,0)         X           p2down(4,4,0)
 //
 //
 
@@ -67,21 +67,21 @@
 
 int main (int argc, char * argv[])
 {
-    Coords p1up(4,4,8);
-    Coords p2up(-4,4,8);
-    Coords p3up(-4,-4,8);
-    Coords p4up(4,-4,8);
+    Coords p1up(-4,4,8);
+    Coords p2up(4,4,8);
+    Coords p3up(4,-4,8);
+    Coords p4up(-4,-4,8);
     
-    Coords p1down(4,4,0);
-    Coords p2down(-4,4,0);
-    Coords p3down(-4,-4,0);
-    Coords p4down(4,-4,0);
+    Coords p1down(-4,4,0);
+    Coords p2down(4,4,0);
+    Coords p3down(4,-4,0);
+    Coords p4down(-4,-4,0);
     
-    Rectangle ceiling(p2up, p4up);
-    Rectangle wall1(p4up, p1down);
-    Rectangle wall2(p2up, p1down);
-    Rectangle wall3(p3up, p2down);
-    Rectangle wall4(p3up, p4down);
+    Rectangle ceiling(p1up, p2up, p4up, p4up);
+    Rectangle wall1(p2up, p1up, p1down, p2up);
+    Rectangle wall2(p3up, p2up, p2down, p3down);
+    Rectangle wall3(p4up, p3up, p3down, p4down);
+    Rectangle wall4(p1up, p4up, p4down, p1down);
     
     cout<<"\nCeiling:"<<endl;
     ceiling.Print();

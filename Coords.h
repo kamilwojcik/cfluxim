@@ -48,7 +48,7 @@ double tripleProduct(Coords v1, Coords v2, Coords v3);
 
 double norm(Coords v1);
 
-double distance(Coords p1, Coords p2);
+double distance(Coords p1, Coords p2); //Euclidean metric
 
 Coords operator*(double scalar, Coords vector);
 

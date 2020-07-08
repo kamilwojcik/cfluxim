@@ -20,6 +20,12 @@ bool Plane::IsDefinitionGood(double a, double b, double c, double d)
 /////////////
 //set
 
+void Plane::SetPlane(Coords & normalVector, Coords & point)
+{
+    double D = -(point[0]*normalVector[0] + point[1]*normalVector[1] + point[2]*normalVector[2]);
+    SetPlane (normalVector[0], normalVector[1], normalVector[2], D);
+}
+
 void Plane::SetPlane(double a, double b, double c, double d)
 {
     if (IsDefinitionGood(a,b,c,d))
@@ -134,4 +140,9 @@ bool Plane::BelongsToPlane(Coords point)
 Plane::Plane(double a, double b, double c, double d)
 {
     SetPlane(a,b,c,d);
+}
+
+Plane::Plane(Coords & normalVector, Coords & point)
+{
+    SetPlane(normalVector, point);
 }

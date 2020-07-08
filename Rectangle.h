@@ -6,18 +6,19 @@
 #include "Plane.h"
 
 ////////////////////////////////////////////////////////////////////////////
-// class Rectangle = plane + two points that defines the rectangular area.
+// class Rectangle = plane + 4 points that defines the rectangular area.
 //
 // Rectangle is defined by two opposite vertices of the rectangle 'upLeft' and 'downRight':
 //
-// upLeft
-//    *____________________
+//
+//   V1____________________V2
 //    |                    |
 //    |                    |
 //    |                    |
 //    |____________________|
-//                         * downRight
+//   V4                    V3
 // Surface area is calculated automatically after setting V1 and V2
+// 
 //
 // Spherical coordinates are NOT supported for by this class.
 //
@@ -36,24 +37,23 @@
 class Rectangle
 {
     Plane plane;
-    Coords upLeft, downRight, hitPosition, hitRelative;
+    Coords v1,v2,v3,v4, hitPosition;
     double surfaceArea, edge1, edge2;
     
     bool CalculateEdgesAndPlane();
     
 public:
     void SetDefault();
-    bool SetRectangle(Coords & UpLeft, Coords & DownRight);
-    //void SetNormalVecDirection(bool direction);
+    bool SetRectangle(Coords & vertice1, Coords & vertice2, Coords & vertice3, Coords & vertice4);
+    void ChangeNormalVecDirection();
     
     Coords RelativeToAbsolute(Coords relative);
     Coords AbsoluteToRelative(Coords absolute);
-    Momentum VecToAbsolute(Momentum);
-    Momentum VecToRelative(Momentum);
+    //Momentum VecToAbsolute(Momentum);
+    //Momentum VecToRelative(Momentum);
     
     double GetSurfaceArea();
-    Coords GetUpLeft();
-    Coords GetDownRight();
+    Coords GetVertice(int index);
     Plane  GetPlane();
     
     Coords GetHitPosition(); //returns absolute hit position
@@ -64,7 +64,7 @@ public:
     void Print();
     
     Rectangle();
-    Rectangle(Coords&, Coords&);
+    Rectangle(Coords & vertice1, Coords & vertice2, Coords & vertice3, Coords & vertice4);
 };
 
 #endif

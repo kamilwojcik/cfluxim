@@ -54,6 +54,15 @@ int main (int argc, char *argv[])
     point=Pi.GetHitPosition(part);
     point.Print();
     
+    cout<<"\nSetting the plane with normal vector and point"<<endl;
+    Coords normalVec(-1,1,5.5);
+    cout<<"NormalVec: ";
+    normalVec.Print();
+    cout<<"Point: ";
+    point.Print();
+    Plane Q(normalVec, point);
+    Q.Print();
+    cout<<"\nDoes the point belong to the plane? Answer: "<<Q.BelongsToPlane(point)<<endl;
     
     
     return 0;
