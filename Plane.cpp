@@ -82,7 +82,7 @@ double Plane::operator[](int index)
 
 bool Plane::HitsPlane(Particle particle)
 {
-    return scalarProduct( particle.GetMomentum().GetCarthesian(), GetNormalVector()) != 0;
+    return abs(scalarProduct( particle.GetMomentum().GetCarthesian(), GetNormalVector())) > 10e-10;
 }
 
 
@@ -131,7 +131,8 @@ void Plane::Print()
 //other
 bool Plane::BelongsToPlane(Coords point)
 {
-    return scalarProduct(GetNormalVector(), point) + D == 0;
+    //cout<<"Belongs to plane: "<<scalarProduct(GetNormalVector(), point) + D<<endl;
+    return abs(scalarProduct(GetNormalVector(), point) + D) < 10e-14;
 }
 
 ///////////////////////////

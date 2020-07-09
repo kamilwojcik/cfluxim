@@ -33,13 +33,18 @@ bool Rectangle::CalculateEdgesAndPlane()
     edge1=distance(v1,v2);
     edge2=distance(v2,v3);
     
-    if ( edge1 != distance(v4,v3) && edge2 != distance(v1, v4) )
+    if ( (edge1 != distance(v4,v3) && edge2 != distance(v1, v4)) || scalarProduct(v2-v1, v4-v1) != 0 )
     {
         cout<<"Warning: not a rectangle!"<<endl;
         success=false;
     }
     
     surfaceArea = edge1*edge2;
+    
+    vec12 = v2-v1;
+    vec23 = v3-v2;
+    vec34 = v4-v3;
+    vec41 = v1-v4;
     
     return success;
 }
@@ -110,14 +115,12 @@ Coords Rectangle::GetHitPosition()
 
 bool Rectangle::HitsRectangle(Particle particle)
 {
-    bool ans = false;
-        
+    bool ans=false;
+    
     if ( plane.HitsPlane(particle) )
     {
         hitPosition = plane.GetHitPosition(particle);
-        double diameter = distance(v1,v3);
-        
-        if ( distance(hitPosition, v1)<=diameter && distance(hitPosition, v2)<=diameter && distance(hitPosition, v3)<=diameter && distance(hitPosition, v4)<=diameter ) ans = true;
+        ans = scalarProduct(vec12, hitPosition - v1) >= 0 && scalarProduct(vec23, hitPosition - v2) >= 0 && scalarProduct(vec34, hitPosition - v3) >= 0 && scalarProduct(vec41, hitPosition - v4) >= 0;
     }
     return ans;
 }
@@ -132,6 +135,11 @@ Rectangle Rectangle::operator=(Rectangle instance_to_copy)
     surfaceArea = instance_to_copy.surfaceArea;
     edge1 = instance_to_copy.edge1;
     edge2 = instance_to_copy.edge2;
+    vec12 = instance_to_copy.vec12;
+    vec23 = instance_to_copy.vec23;
+    vec34 = instance_to_copy.vec34;
+    vec41 = instance_to_copy.vec41;
+    
     return instance_to_copy;
 }
 

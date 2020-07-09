@@ -38,6 +38,7 @@ class Rectangle
 {
     Plane plane;
     Coords v1,v2,v3,v4, hitPosition;
+    Coords vec12, vec23, vec34, vec41;
     double surfaceArea, edge1, edge2;
     
     bool CalculateEdgesAndPlane();
