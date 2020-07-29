@@ -21,7 +21,8 @@ A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern
 ## Installation
 
 instalaction bash scripts for all cpp files are provided. Please update the file paths inside before using it!
-Dear ROOT user, remember to source `thisroot.sh' before installation ;)
+
+Dear ROOT user, remember to source `thisroot.sh` before installation ;)
 
 ## License
 
