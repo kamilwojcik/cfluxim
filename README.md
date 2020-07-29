@@ -11,12 +11,12 @@ A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern
 
 ## Structure
 
-CuboidGenerator.cpp - generates particles and saving in ROOT tree.
-FluxAnalyzer.cpp - generates some histograms needed for simple quality check of generated particles.
-TrackAnalyzer.cpp - analysis of tracks regardint defined detector geometry.
+`CuboidGenerator.cpp` - generates particles and saving in ROOT tree.  
+`FluxAnalyzer.cpp` - generates some histograms needed for simple quality check of generated particles.  
+`TrackAnalyzer.cpp` - analysis of tracks regardint defined detector geometry.
 
-`test` directory contains not very professional, very simple tests for classes.
-`presentatyon` directory contains Latex presentation (code, images and pdf output)
+`test` directory contains not very professional, very simple tests for classes.  
+`presentatyon` directory contains Latex presentation (code, images and pdf output)  
 
 ## Installation
 
