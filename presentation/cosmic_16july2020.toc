@@ -1,0 +1,11 @@
+\beamer@sectionintoc {1}{General information}{3}{0}{1}
+\beamer@sectionintoc {2}{Cosmic ray flux -- definition}{7}{0}{2}
+\beamer@sectionintoc {3}{Simulation design}{13}{0}{3}
+\beamer@subsectionintoc {3}{1}{CuboidGenerator}{14}{0}{3}
+\beamer@subsectionintoc {3}{2}{TrackAnalyzer.cpp}{27}{0}{3}
+\beamer@subsectionintoc {3}{3}{FluxAnalyzer.cpp and quality check}{32}{0}{3}
+\beamer@sectionintoc {4}{Example simulation results}{40}{0}{4}
+\beamer@sectionintoc {5}{Code description}{50}{0}{5}
+\beamer@subsectionintoc {5}{1}{Project class structure}{51}{0}{5}
+\beamer@subsectionintoc {5}{2}{Description of selected classes}{51}{0}{5}
+\beamer@subsectionintoc {5}{3}{License}{51}{0}{5}
