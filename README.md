@@ -3,7 +3,7 @@ A simple cosmic ray simulation tool
 
 ## More precysely
 
-It is precisely described in the `presentation.pdf' file in `presentation' directory
+It is precisely described in the `presentation.pdf` file in `presentation` directory
 
 ## Dependencies
 
@@ -15,8 +15,8 @@ CuboidGenerator.cpp - generates particles and saving in ROOT tree.
 FluxAnalyzer.cpp - generates some histograms needed for simple quality check of generated particles.
 TrackAnalyzer.cpp - analysis of tracks regardint defined detector geometry.
 
-`test' directory contains not very professional, very simple tests for classes.
-`presentatyon' directory contains Latex presentation (code, images and pdf output)
+`test` directory contains not very professional, very simple tests for classes.
+`presentatyon` directory contains Latex presentation (code, images and pdf output)
 
 ## Installation
 
