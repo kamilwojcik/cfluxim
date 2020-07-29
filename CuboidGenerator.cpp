@@ -67,7 +67,7 @@
 #define PIover2 1.5707963
 #define PI 3.1415927
 
-#define SIM_TIME 3600 //seconds, =1/2 hour
+#define SIM_TIME 3600 //seconds, =1 hour
 
 int main (int argc, char * argv[])
 {
@@ -178,7 +178,12 @@ int main (int argc, char * argv[])
     
     for (int i=1; i<=nBinsPhi; i++)
     {
-        pgen.SetPhiRange(fluxmap->GetXaxis()->GetBinLowEdge(i), fluxmap->GetXaxis()->GetBinUpEdge(i));
+        double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
+        if (phiMin > PItimes2) phiMin = phiMin - PItimes2;
+        double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
+        if (phiMax > PItimes2) phiMax = phiMax - PItimes2;
+
+        pgen.SetPhiRange(phiMin, phiMax);
         
         for (int j=1; j<=nBinsTheta; j++)
         {
@@ -255,7 +260,12 @@ int main (int argc, char * argv[])
         
     for (int i=1; i<=nBinsPhi; i++)
     {
-        pgen.SetPhiRange(fluxmap->GetXaxis()->GetBinLowEdge(i),fluxmap->GetXaxis()->GetBinUpEdge(i));
+        double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
+        if (phiMin > PItimes2) phiMin = phiMin - PItimes2;
+        double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
+        if (phiMax > PItimes2) phiMax = phiMax - PItimes2;
+        
+        pgen.SetPhiRange(phiMin, phiMax);
         
         for (int j=1; j<=nBinsTheta; j++)
         {
@@ -328,7 +338,12 @@ int main (int argc, char * argv[])
     
     for (int i=1; i<=nBinsPhi; i++)
     {
-        pgen.SetPhiRange(fluxmap->GetXaxis()->GetBinLowEdge(i),fluxmap->GetXaxis()->GetBinUpEdge(i));
+        double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
+        if (phiMin > PItimes2) phiMin = phiMin - PItimes2;
+        double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
+        if (phiMax > PItimes2) phiMax = phiMax - PItimes2;
+        
+        pgen.SetPhiRange(phiMin, phiMax);
         
         for (int j=1; j<=nBinsTheta; j++)
         {
@@ -400,7 +415,12 @@ int main (int argc, char * argv[])
     
     for (int i=1; i<=nBinsPhi; i++)
     {
-        pgen.SetPhiRange(fluxmap->GetXaxis()->GetBinLowEdge(i),fluxmap->GetXaxis()->GetBinUpEdge(i));
+        double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
+        if (phiMin > PItimes2) phiMin = phiMin - PItimes2;
+        double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
+        if (phiMax > PItimes2) phiMax = phiMax - PItimes2;
+        
+        pgen.SetPhiRange(phiMin, phiMax);
         
         for (int j=1; j<=nBinsTheta; j++)
         {
@@ -473,7 +493,12 @@ int main (int argc, char * argv[])
     
     for (int i=1; i<=nBinsPhi; i++)
     {
-        pgen.SetPhiRange(fluxmap->GetXaxis()->GetBinLowEdge(i),fluxmap->GetXaxis()->GetBinUpEdge(i));
+        double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
+        if (phiMin > PItimes2) phiMin = phiMin - PItimes2;
+        double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
+        if (phiMax > PItimes2) phiMax = phiMax - PItimes2;
+        
+        pgen.SetPhiRange(phiMin, phiMax);
         
         for (int j=1; j<=nBinsTheta; j++)
         {

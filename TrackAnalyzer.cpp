@@ -13,6 +13,7 @@
 #include "TH1D.h"
 #include "TFile.h"
 #include "TRandom3.h"
+#include "TCanvas.h"
 
 #include <iostream>
 #include <fstream>
@@ -83,6 +84,7 @@ int main (int argc, char * argv[])
     outtree.Branch("pr", &pr);
     outtree.Branch("ptheta", &ptheta);
     outtree.Branch("pphi", &pphi);
+    
     outtree.Branch("t0x",&tpc[0][0]);
     outtree.Branch("t0y",&tpc[0][1]);
     outtree.Branch("t0z",&tpc[0][2]);
@@ -234,6 +236,7 @@ int main (int argc, char * argv[])
     outtree.Branch("m26",&hitmcord[26]);
     outtree.Branch("m27",&hitmcord[27]);
     
+    TH1D FluxTheta("FluxTheta","FluxTheta", 8,0,90);
     
     //outtree.Print();
     
@@ -300,13 +303,15 @@ int main (int argc, char * argv[])
 // Track analysis - loop over intree
 //
 
+    
+    
     TRandom3 rng(time(NULL));
     ofstream textfile("hitpositions.txt", ofstream::trunc);
     string line;
     int N = intree->GetEntries();
     for (int n=0; n<N; n++)
     {
-        //if (n%20!=0) continue;
+        if (n%300!=0) continue; //- smaller sample for tests and drawings
         
         cout<<"Event: "<<n<<"\r"<<flush;
         intree->GetEvent(n);
@@ -368,8 +373,20 @@ int main (int argc, char * argv[])
             
         }
         
+        
+        for (int f=0; f<8; f++)
+        {
+            if (hitmcord[f] && hitmcord[f+14] && wallID==0) FluxTheta.AddBinContent(f,1);
+        }
+        
+        
         outtree.Fill();
     }
+    
+    TCanvas cnv;
+    cnv.cd();
+    FluxTheta.Draw();
+    cnv.SaveAs("FluxTheta.png");
     
     cout<<"Number of analyzed events/particles: "<<N<<endl;
     outFile.Write();

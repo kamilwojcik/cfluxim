@@ -16,7 +16,8 @@ using namespace std;
 
 double SolidAngle(double thetaMin, double thetaMax, double dPhi)
 {
-    double fullPhi = ( PItimes2 * (1 - cos(thetaMax)) ) - ( PItimes2 * (1 - cos(thetaMin)) );
+    //double fullPhi = 4*PI*(pow(sin(thetaMax/2.),2) - pow(sin(thetaMin/2.),2));//( PItimes2 * (1. - cos(thetaMax)) ) - ( PItimes2 * (1. - cos(thetaMin)) );
+    double fullPhi = PItimes2 * ( cos(thetaMin) - cos(thetaMax) );
     double solidAngle = fullPhi * dPhi/PItimes2;
     
     return solidAngle;
@@ -42,7 +43,6 @@ void FluxList::CalculateNpps()
     double dPhi = (phiMax-phiMin) / (double)phiNbins;
     double thetaMin = fluxVsTheta->GetXaxis()->GetXmin();
     double dTheta = fluxVsTheta->GetBinWidth(1);
-    
     int thetaNbins=fluxVsTheta->GetNbinsX();
         
     double npps_ij;
@@ -50,15 +50,15 @@ void FluxList::CalculateNpps()
     NppsPhiTheta->GetXaxis()->SetTitle("phi [rad]");
     NppsPhiTheta->GetYaxis()->SetTitle("theta [rad]");
     
-    //area "horizobtal component"
+    //area "horizobtal projection"
     double ahor = area * cos( areaTheta );
-    //area "vertical component"
+    //area "vertical projection"
     double aver = area * sin( areaTheta );
     
     for (double phi_i=phiMin+dPhi/2.; phi_i<phiMax; phi_i+=dPhi)
         for (int j=0; j<thetaNbins; j++)
         {
-            npps_ij=fluxVsTheta->GetBinContent(j+1) * SolidAngle(thetaMin, thetaMin+dTheta, dPhi) * (ahor + aver*cos(phi_i - areaPhi)) * cos((thetaMin + j*dTheta) - areaTheta);
+            npps_ij=fluxVsTheta->GetBinContent(j+1) * SolidAngle(thetaMin+j*dTheta, thetaMin+(j+1.)*dTheta, dPhi) * (ahor + aver*cos(phi_i - areaPhi)) * cos((thetaMin + j*dTheta) - areaTheta);
             NppsPhiTheta->Fill(phi_i, thetaMin + j*dTheta , npps_ij);
         }
     
