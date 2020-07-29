@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ ../Coords.cpp testcoords.cpp -o testcoords
+g++ ../Coords.cpp CoordsTest.cpp -o testCoords
