@@ -352,7 +352,7 @@ int main (int argc, char * argv[])
             if (n_module_hits >= 2 ) break;
             
             
-            if (module[i].HitsRectangle(particle))
+            if (mod[i].HitsRectangle(particle))
             {   
                 if( rng.Rndm() > 0.9 ) continue; //efficiency of the module is about 90%
                 n_module_hits++;
