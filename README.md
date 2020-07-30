@@ -32,4 +32,4 @@ You may run one of the scripts to compile a single module or test, or:
 
 # License
 
-MIT
+MIT. [Full text here.](https://github.com/kamilwojcik/cfluxim/blob/mcord/LICENSE)
