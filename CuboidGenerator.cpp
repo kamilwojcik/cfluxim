@@ -133,11 +133,11 @@ int main (int argc, char * argv[])
     /////////////////////////////////////////////////////
     //Loading flux and momentum distriutions
     
-    TFile * file= TFile::Open("hMuMom.root");
+    TFile * file= TFile::Open("flux_config/hMuMom.root");
     file->Print();
     TH1D * hMuMom= (TH1D*)file->Get("hMuMom");
     
-    file = TFile::Open("uFluxTheta.root");
+    file = TFile::Open("flux_config/uFluxTheta.root");
     file->Print();
     TH1D * uFluxTheta= (TH1D*)file->Get("uFluxTheta");
     
