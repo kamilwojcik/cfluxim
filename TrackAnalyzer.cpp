@@ -67,8 +67,8 @@ int main (int argc, char * argv[])
     intree->SetBranchAddress("pphi", &pphi);
     
     
-    float mcord[28][3], tpc[2][3];
-    bool hitmcord[28], hittpc[2];
+    float module[28][3], tpc[2][3];
+    bool hitmodule[28], hittpc[2];
  
     TFile outFile("detectors.root", "RECREATE");
     TTree outtree("detectors", "detectors");
@@ -91,149 +91,149 @@ int main (int argc, char * argv[])
     outtree.Branch("t1y",&tpc[1][1]);
     outtree.Branch("t1z",&tpc[1][2]);
 
-    outtree.Branch("m0x",&mcord[0][0]);
-    outtree.Branch("m0y",&mcord[0][1]);
-    outtree.Branch("m0z",&mcord[0][2]);
+    outtree.Branch("m0x",&module[0][0]);
+    outtree.Branch("m0y",&module[0][1]);
+    outtree.Branch("m0z",&module[0][2]);
     
-    outtree.Branch("m1x",&mcord[1][0]);
-    outtree.Branch("m1y",&mcord[1][1]);
-    outtree.Branch("m1z",&mcord[1][2]);
+    outtree.Branch("m1x",&module[1][0]);
+    outtree.Branch("m1y",&module[1][1]);
+    outtree.Branch("m1z",&module[1][2]);
     
-    outtree.Branch("m2x",&mcord[2][0]);
-    outtree.Branch("m2y",&mcord[2][1]);
-    outtree.Branch("m2z",&mcord[2][2]);
+    outtree.Branch("m2x",&module[2][0]);
+    outtree.Branch("m2y",&module[2][1]);
+    outtree.Branch("m2z",&module[2][2]);
     
-    outtree.Branch("m3x",&mcord[3][0]);
-    outtree.Branch("m3y",&mcord[3][1]);
-    outtree.Branch("m3z",&mcord[3][2]);
+    outtree.Branch("m3x",&module[3][0]);
+    outtree.Branch("m3y",&module[3][1]);
+    outtree.Branch("m3z",&module[3][2]);
     
-    outtree.Branch("m4x",&mcord[4][0]);
-    outtree.Branch("m4y",&mcord[4][1]);
-    outtree.Branch("m4z",&mcord[4][2]);
+    outtree.Branch("m4x",&module[4][0]);
+    outtree.Branch("m4y",&module[4][1]);
+    outtree.Branch("m4z",&module[4][2]);
     
-    outtree.Branch("m5x",&mcord[5][0]);
-    outtree.Branch("m5y",&mcord[5][1]);
-    outtree.Branch("m5z",&mcord[5][2]);
+    outtree.Branch("m5x",&module[5][0]);
+    outtree.Branch("m5y",&module[5][1]);
+    outtree.Branch("m5z",&module[5][2]);
     
-    outtree.Branch("m6x",&mcord[6][0]);
-    outtree.Branch("m6y",&mcord[6][1]);
-    outtree.Branch("m6z",&mcord[6][2]);
+    outtree.Branch("m6x",&module[6][0]);
+    outtree.Branch("m6y",&module[6][1]);
+    outtree.Branch("m6z",&module[6][2]);
     
-    outtree.Branch("m7x",&mcord[7][0]);
-    outtree.Branch("m7y",&mcord[7][1]);
-    outtree.Branch("m7z",&mcord[7][2]);
+    outtree.Branch("m7x",&module[7][0]);
+    outtree.Branch("m7y",&module[7][1]);
+    outtree.Branch("m7z",&module[7][2]);
     
-    outtree.Branch("m8x",&mcord[8][0]);
-    outtree.Branch("m8y",&mcord[8][1]);
-    outtree.Branch("m8z",&mcord[8][2]);
+    outtree.Branch("m8x",&module[8][0]);
+    outtree.Branch("m8y",&module[8][1]);
+    outtree.Branch("m8z",&module[8][2]);
     
-    outtree.Branch("m9x",&mcord[9][0]);
-    outtree.Branch("m9y",&mcord[9][1]);
-    outtree.Branch("m9z",&mcord[9][2]);
+    outtree.Branch("m9x",&module[9][0]);
+    outtree.Branch("m9y",&module[9][1]);
+    outtree.Branch("m9z",&module[9][2]);
     
-    outtree.Branch("m10x",&mcord[10][0]);
-    outtree.Branch("m10y",&mcord[10][1]);
-    outtree.Branch("m10z",&mcord[10][2]);
+    outtree.Branch("m10x",&module[10][0]);
+    outtree.Branch("m10y",&module[10][1]);
+    outtree.Branch("m10z",&module[10][2]);
     
-    outtree.Branch("m11x",&mcord[11][0]);
-    outtree.Branch("m11y",&mcord[11][1]);
-    outtree.Branch("m11z",&mcord[11][2]);
+    outtree.Branch("m11x",&module[11][0]);
+    outtree.Branch("m11y",&module[11][1]);
+    outtree.Branch("m11z",&module[11][2]);
     
-    outtree.Branch("m12x",&mcord[12][0]);
-    outtree.Branch("m12y",&mcord[12][1]);
-    outtree.Branch("m12z",&mcord[12][2]);
+    outtree.Branch("m12x",&module[12][0]);
+    outtree.Branch("m12y",&module[12][1]);
+    outtree.Branch("m12z",&module[12][2]);
     
-    outtree.Branch("m13x",&mcord[13][0]);
-    outtree.Branch("m13y",&mcord[13][1]);
-    outtree.Branch("m13z",&mcord[13][2]);
+    outtree.Branch("m13x",&module[13][0]);
+    outtree.Branch("m13y",&module[13][1]);
+    outtree.Branch("m13z",&module[13][2]);
     
-    outtree.Branch("m14x",&mcord[14][0]);
-    outtree.Branch("m14y",&mcord[14][1]);
-    outtree.Branch("m14z",&mcord[14][2]);
+    outtree.Branch("m14x",&module[14][0]);
+    outtree.Branch("m14y",&module[14][1]);
+    outtree.Branch("m14z",&module[14][2]);
     
-    outtree.Branch("m15x",&mcord[15][0]);
-    outtree.Branch("m15y",&mcord[15][1]);
-    outtree.Branch("m15z",&mcord[15][2]);
+    outtree.Branch("m15x",&module[15][0]);
+    outtree.Branch("m15y",&module[15][1]);
+    outtree.Branch("m15z",&module[15][2]);
     
-    outtree.Branch("m16x",&mcord[16][0]);
-    outtree.Branch("m16y",&mcord[16][1]);
-    outtree.Branch("m16z",&mcord[16][2]);
+    outtree.Branch("m16x",&module[16][0]);
+    outtree.Branch("m16y",&module[16][1]);
+    outtree.Branch("m16z",&module[16][2]);
     
-    outtree.Branch("m17x",&mcord[17][0]);
-    outtree.Branch("m17y",&mcord[17][1]);
-    outtree.Branch("m17z",&mcord[17][2]);
+    outtree.Branch("m17x",&module[17][0]);
+    outtree.Branch("m17y",&module[17][1]);
+    outtree.Branch("m17z",&module[17][2]);
     
-    outtree.Branch("m18x",&mcord[18][0]);
-    outtree.Branch("m18y",&mcord[18][1]);
-    outtree.Branch("m18z",&mcord[18][2]);
+    outtree.Branch("m18x",&module[18][0]);
+    outtree.Branch("m18y",&module[18][1]);
+    outtree.Branch("m18z",&module[18][2]);
     
-    outtree.Branch("m19x",&mcord[19][0]);
-    outtree.Branch("m19y",&mcord[19][1]);
-    outtree.Branch("m19z",&mcord[19][2]);
+    outtree.Branch("m19x",&module[19][0]);
+    outtree.Branch("m19y",&module[19][1]);
+    outtree.Branch("m19z",&module[19][2]);
     
-    outtree.Branch("m20x",&mcord[20][0]);
-    outtree.Branch("m20y",&mcord[20][1]);
-    outtree.Branch("m20z",&mcord[20][2]);
+    outtree.Branch("m20x",&module[20][0]);
+    outtree.Branch("m20y",&module[20][1]);
+    outtree.Branch("m20z",&module[20][2]);
     
-    outtree.Branch("m21x",&mcord[21][0]);
-    outtree.Branch("m21y",&mcord[21][1]);
-    outtree.Branch("m21z",&mcord[21][2]);
+    outtree.Branch("m21x",&module[21][0]);
+    outtree.Branch("m21y",&module[21][1]);
+    outtree.Branch("m21z",&module[21][2]);
     
-    outtree.Branch("m22x",&mcord[22][0]);
-    outtree.Branch("m22y",&mcord[22][1]);
-    outtree.Branch("m22z",&mcord[22][2]);
+    outtree.Branch("m22x",&module[22][0]);
+    outtree.Branch("m22y",&module[22][1]);
+    outtree.Branch("m22z",&module[22][2]);
     
-    outtree.Branch("m23x",&mcord[23][0]);
-    outtree.Branch("m23y",&mcord[23][1]);
-    outtree.Branch("m23z",&mcord[23][2]);
+    outtree.Branch("m23x",&module[23][0]);
+    outtree.Branch("m23y",&module[23][1]);
+    outtree.Branch("m23z",&module[23][2]);
     
-    outtree.Branch("m24x",&mcord[24][0]);
-    outtree.Branch("m24y",&mcord[24][1]);
-    outtree.Branch("m24z",&mcord[24][2]);
+    outtree.Branch("m24x",&module[24][0]);
+    outtree.Branch("m24y",&module[24][1]);
+    outtree.Branch("m24z",&module[24][2]);
     
-    outtree.Branch("m25x",&mcord[25][0]);
-    outtree.Branch("m25y",&mcord[25][1]);
-    outtree.Branch("m25z",&mcord[25][2]);
+    outtree.Branch("m25x",&module[25][0]);
+    outtree.Branch("m25y",&module[25][1]);
+    outtree.Branch("m25z",&module[25][2]);
     
-    outtree.Branch("m26x",&mcord[26][0]);
-    outtree.Branch("m26y",&mcord[26][1]);
-    outtree.Branch("m26z",&mcord[26][2]);
+    outtree.Branch("m26x",&module[26][0]);
+    outtree.Branch("m26y",&module[26][1]);
+    outtree.Branch("m26z",&module[26][2]);
     
-    outtree.Branch("m27x",&mcord[27][0]);
-    outtree.Branch("m27y",&mcord[27][1]);
-    outtree.Branch("m27z",&mcord[27][2]);
+    outtree.Branch("m27x",&module[27][0]);
+    outtree.Branch("m27y",&module[27][1]);
+    outtree.Branch("m27z",&module[27][2]);
     
     outtree.Branch("t0",&hittpc[0]);
     outtree.Branch("t1",&hittpc[1]);
     
-    outtree.Branch("m0",&hitmcord[0]);
-    outtree.Branch("m1",&hitmcord[1]);
-    outtree.Branch("m2",&hitmcord[2]);
-    outtree.Branch("m3",&hitmcord[3]);
-    outtree.Branch("m4",&hitmcord[4]);
-    outtree.Branch("m5",&hitmcord[5]);
-    outtree.Branch("m6",&hitmcord[6]);
-    outtree.Branch("m7",&hitmcord[7]);
-    outtree.Branch("m8",&hitmcord[8]);
-    outtree.Branch("m9",&hitmcord[9]);
-    outtree.Branch("m10",&hitmcord[10]);
-    outtree.Branch("m11",&hitmcord[11]);
-    outtree.Branch("m12",&hitmcord[12]);
-    outtree.Branch("m13",&hitmcord[13]);
-    outtree.Branch("m14",&hitmcord[14]);
-    outtree.Branch("m15",&hitmcord[15]);
-    outtree.Branch("m16",&hitmcord[16]);
-    outtree.Branch("m17",&hitmcord[17]);
-    outtree.Branch("m18",&hitmcord[18]);
-    outtree.Branch("m19",&hitmcord[19]);
-    outtree.Branch("m20",&hitmcord[20]);
-    outtree.Branch("m21",&hitmcord[21]);
-    outtree.Branch("m22",&hitmcord[22]);
-    outtree.Branch("m23",&hitmcord[23]);
-    outtree.Branch("m24",&hitmcord[24]);
-    outtree.Branch("m25",&hitmcord[25]);
-    outtree.Branch("m26",&hitmcord[26]);
-    outtree.Branch("m27",&hitmcord[27]);
+    outtree.Branch("m0",&hitmodule[0]);
+    outtree.Branch("m1",&hitmodule[1]);
+    outtree.Branch("m2",&hitmodule[2]);
+    outtree.Branch("m3",&hitmodule[3]);
+    outtree.Branch("m4",&hitmodule[4]);
+    outtree.Branch("m5",&hitmodule[5]);
+    outtree.Branch("m6",&hitmodule[6]);
+    outtree.Branch("m7",&hitmodule[7]);
+    outtree.Branch("m8",&hitmodule[8]);
+    outtree.Branch("m9",&hitmodule[9]);
+    outtree.Branch("m10",&hitmodule[10]);
+    outtree.Branch("m11",&hitmodule[11]);
+    outtree.Branch("m12",&hitmodule[12]);
+    outtree.Branch("m13",&hitmodule[13]);
+    outtree.Branch("m14",&hitmodule[14]);
+    outtree.Branch("m15",&hitmodule[15]);
+    outtree.Branch("m16",&hitmodule[16]);
+    outtree.Branch("m17",&hitmodule[17]);
+    outtree.Branch("m18",&hitmodule[18]);
+    outtree.Branch("m19",&hitmodule[19]);
+    outtree.Branch("m20",&hitmodule[20]);
+    outtree.Branch("m21",&hitmodule[21]);
+    outtree.Branch("m22",&hitmodule[22]);
+    outtree.Branch("m23",&hitmodule[23]);
+    outtree.Branch("m24",&hitmodule[24]);
+    outtree.Branch("m25",&hitmodule[25]);
+    outtree.Branch("m26",&hitmodule[26]);
+    outtree.Branch("m27",&hitmodule[27]);
     
     TH1D FluxTheta("FluxTheta","FluxTheta", 8,0,90);
     
@@ -242,8 +242,9 @@ int main (int argc, char * argv[])
     /////////////////////
     // tpc
     //
-    // asis: x: 3.4 m
-    // r= (2.8 - 0.6) / 2 = 1.1 m
+    // asis: parallel x: 3.4 m
+    // axis elevation (z) = 4 m
+    // r= 1.1 m
     //
     Coords s1(-1.7,0,4);
     Coords s2(1.7,0,4);
@@ -255,14 +256,14 @@ int main (int argc, char * argv[])
     cout<<endl;
     
     /////////////////////
-    // mcord modules
+    // modules
     //
-    // 28 modules around the magnet
+    // 28 modules around the TPC
     // w = 4,784 m (2x 2.392)
     // l = 0.675 m (2x 0.3375)
-    // radius of magnet = z = 6623/2 = 3311.5 
+    // radius = 3311.5 
     
-    Rectangle module[28];
+    Rectangle mod[28];
     
     double x = 2.392;
     double y = 0.3375;
@@ -273,7 +274,7 @@ int main (int argc, char * argv[])
     Coords z_elevation(0,0,4); //detector axis is elevated 4m over z=0 level
     Coords v1prim, v2prim, v3prim, v4prim;
     
-    cout<<"Mcord modules: "<<endl;
+    cout<<"Modules: "<<endl;
     for (int i=0; i<28; i++)
     {
         double angle = i*PI/14.;
@@ -289,9 +290,9 @@ int main (int argc, char * argv[])
         v3prim = v3prim + z_elevation;
         v4prim = v4prim + z_elevation;
 
-        module[i].SetRectangle(v1prim, v2prim, v3prim, v4prim);
-        cout<<"\nMcord "<<i<<endl;
-        module[i].Print();
+        mod[i].SetRectangle(v1prim, v2prim, v3prim, v4prim);
+        cout<<"\nModule "<<i<<endl;
+        mod[i].Print();
     }
     cout<<endl;
     
@@ -342,30 +343,30 @@ int main (int argc, char * argv[])
                 
         }
         
-        for (int i=0; i<28; i++) hitmcord[i]=false;
+        for (int i=0; i<28; i++) hitmodule[i]=false;
         
         
-        double n_mcord_hits=0;
+        double n_module_hits=0;
         for (int i=0; i<28; i++)
         {
-            if (n_mcord_hits >= 2 ) break;
+            if (n_module_hits >= 2 ) break;
             
             
             if (module[i].HitsRectangle(particle))
             {   
                 if( rng.Rndm() > 0.9 ) continue; //efficiency of the module is about 90%
-                n_mcord_hits++;
-                hitmcord[i]=true;
-                hitpos=module[i].GetHitPosition();
+                n_module_hits++;
+                hitmodule[i]=true;
+                hitpos=mod[i].GetHitPosition();
                 
-                mcord[i][0]=0;
-                mcord[i][1]=0;
-                mcord[i][2]=0;
-                mcord[i][0]=hitpos[0];
-                mcord[i][1]=hitpos[1];
-                mcord[i][2]=hitpos[2];
+                module[i][0]=0;
+                module[i][1]=0;
+                module[i][2]=0;
+                module[i][0]=hitpos[0];
+                module[i][1]=hitpos[1];
+                module[i][2]=hitpos[2];
                 
-                if (mcord[i][2] < 0 ) cout<<"Warning z<0"<<endl;
+                if (module[i][2] < 0 ) cout<<"Warning z<0"<<endl;
                 line=to_string(hitpos[0]) + " " + to_string(hitpos[1]) + " " + to_string(hitpos[2]) + "\n";
                 textfile<<line;
             }
@@ -375,7 +376,7 @@ int main (int argc, char * argv[])
         
         for (int f=0; f<8; f++)
         {
-            if (hitmcord[f] && hitmcord[f+14] && wallID==0) FluxTheta.AddBinContent(f,1);
+            if (hitmodule[f] && hitmodule[f+14] && wallID==0) FluxTheta.AddBinContent(f,1);
         }
         
         
