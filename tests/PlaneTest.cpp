@@ -1,8 +1,8 @@
 #include <iostream>
-#include "../Coords.h"
-#include "../Plane.h"
-#include "../Particle.h"
-#include "../Momentum.h"
+#include "../classes/Coords.h"
+#include "../classes/Plane.h"
+#include "../classes/Particle.h"
+#include "../classes/Momentum.h"
 
 using namespace std;
 

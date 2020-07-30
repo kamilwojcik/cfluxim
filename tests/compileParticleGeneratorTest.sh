@@ -2,4 +2,4 @@
 
 #compilation arguments
 
-g++ ../ParticleGenerator.cpp ../RNGQuantile.cpp ../Particle.cpp ../Momentum.cpp ../Coords.cpp ParticleGeneratorTest.cpp -o testParticleGenerator -std=c++14 -pthread -O2 -m64 -I/home/dane/soft/root6/build/include/ -L/home/dane/soft/root6/build/lib/ -lGui -lCore -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic
+g++ ../classes/ParticleGenerator.cpp ../classes/RNGQuantile.cpp ../classes/Particle.cpp ../classes/Momentum.cpp ../classes/Coords.cpp ParticleGeneratorTest.cpp -o testParticleGenerator `root-config --cflags --libs`

@@ -1,5 +1,5 @@
-#include "../Momentum.h"
-#include "../Coords.h"
+#include "../classes/Momentum.h"
+#include "../classes/Coords.h"
 #include <iostream>
 
 using namespace std;

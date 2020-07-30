@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ ../Coords.cpp ../Momentum.cpp MomentumTest.cpp -o testMomentum
+g++ ../classes/Coords.cpp ../classes/Momentum.cpp MomentumTest.cpp -o testMomentum

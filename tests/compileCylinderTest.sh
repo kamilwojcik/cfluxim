@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ ../Coords.cpp ../Plane.cpp ../Particle.cpp ../Momentum.cpp ../Disk.cpp ../Cylinder.cpp CylinderTest.cpp -o testCylinder
+g++ ../classes/Coords.cpp ../classes/Plane.cpp ../classes/Particle.cpp ../classes/Momentum.cpp ../classes/Disk.cpp ../classes/Cylinder.cpp CylinderTest.cpp -o testCylinder

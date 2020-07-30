@@ -1,12 +1,13 @@
 #include <iostream>
-#include "../Coords.h"
-#include "../Plane.h"
-#include "../Particle.h"
-#include "../Disk.h"
-#include "../Cylinder.h"
 #include <vector>
 #include <iostream>
 #include <cmath>
+
+#include "../classes/Coords.h"
+#include "../classes/Plane.h"
+#include "../classes/Particle.h"
+#include "../classes/Disk.h"
+#include "../classes/Cylinder.h"
 
 using namespace std;
 

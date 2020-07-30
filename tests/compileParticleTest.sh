@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ ../Coords.cpp ../Momentum.cpp ../Particle.cpp ParticleTest.cpp -o testParticle
+g++ ../classes/Coords.cpp ../classes/Momentum.cpp ../classes/Particle.cpp ParticleTest.cpp -o testParticle

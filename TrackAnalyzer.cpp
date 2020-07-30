@@ -1,7 +1,6 @@
 #include "classes/Coords.h"
 #include "classes/Momentum.h"
 #include "classes/Particle.h"
-#include "classes/ParticleGenerator.h"
 #include "classes/FluxList.h"
 #include "classes/Plane.h"
 #include "classes/Rectangle.h"

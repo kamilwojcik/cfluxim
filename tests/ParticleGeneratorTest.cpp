@@ -1,4 +1,8 @@
-#include "../cfluxim.h"
+#include "../classes/ParticleGenerator.h"
+#include "../classes/Particle.h"
+#include "../classes/Momentum.h"
+#include "../classes/Coords.h"
+
 #include <iostream>
 #include "TH1D.h"
 #include "TH2D.h"
@@ -21,7 +25,7 @@ int main(void)
     
     pGen.GetRandomParticle();
     
-    TFile * file= TFile::Open("hQuantile.root");
+    TFile * file= TFile::Open("../flux_config/hQuantile.root");
     cout<<"OpenQuantileFile: "<<"hQuantile.root"<<endl;
     file->Print();
     

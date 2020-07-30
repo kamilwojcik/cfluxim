@@ -3,7 +3,7 @@
 #include "TH1D.h"
 #include "TFile.h"
 
-#include "../RNGQuantile.h"
+#include "../classes/RNGQuantile.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main (int argc, char *argv[])
     qrng.SetDescription("aaa");
     qrng.Print();
     
-    TFile * file= TFile::Open("hQuantile.root");
+    TFile * file= TFile::Open("../flux_config/hQuantile.root");
     cout<<"OpenQuantileFile: "<<"hQuantile.root"<<endl;
     file->Print();
     

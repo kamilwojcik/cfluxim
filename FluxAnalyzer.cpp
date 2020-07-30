@@ -5,8 +5,7 @@
 #include "classes/FluxList.h"
 #include "classes/Plane.h"
 #include "classes/Rectangle.h"
-#include "classes/Disk.h"
-#include "classes/Cylinder.h"
+
 
 #include "TTree.h"
 #include "TH2D.h"

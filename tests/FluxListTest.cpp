@@ -1,4 +1,4 @@
-#include "../FluxList.h"
+#include "../classes/FluxList.h"
 #include <iostream>
 
 #include "TFile.h"
@@ -13,7 +13,7 @@ int main(void)
     
     flst.Print();
     
-    TFile * file= TFile::Open("uFluxTheta.root");
+    TFile * file= TFile::Open("../flux_config/uFluxTheta.root");
     cout<<"Opening uFluxTheta file: "<<"uFluxTheta.root"<<endl;
     file->Print();
     

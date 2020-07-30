@@ -1,29 +1,33 @@
 # cfluxim
 A simple cosmic ray simulation tool
 
-## More precysely
+## More details
 
-It is precisely described in the `presentation.pdf` file in `presentation` directory
+Only muons are implemented at the moment, but implementation of other particles is possible, if needed.  
+It is precisely described in the [presentation](https://github.com/kamilwojcik/cfluxim/blob/mcord/presentation/presentation.pdf)
 
-## Dependencies
+# Dependencies
 
 A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern/) website.
 
-## Structure
+# Components
 
 `CuboidGenerator.cpp` - generates particles and saving in ROOT tree.  
-`FluxAnalyzer.cpp` - generates some histograms needed for simple quality check of generated particles.  
-`TrackAnalyzer.cpp` - analysis of tracks regardint defined detector geometry.
+`FluxAnalyzer.cpp` - takes generated particles as an input and creates some histograms needed for simple quality check.  
+`TrackAnalyzer.cpp` - takes generated particles as an input and performs analysis of tracks regarding defined detector geometry.
+
+`classes` directory contains classes .h and .cpp files  
+`flux_config` directory contains histograms that define muon flux
 
 `test` directory contains not very professional, very simple tests for classes.  
-`presentatyon` directory contains Latex presentation (code, images and pdf output)  
+`presentation` directory contains Latex presentation (code, images and pdf output)  
 
-## Installation
+# Installation
 
-instalaction bash scripts for all cpp files are provided. Please update the file paths inside before using it!
+instalaction bash scripts for all cpp files are provided.
 
 Dear ROOT user, remember to source `thisroot.sh` before installation ;)
 
-## License
+# License
 
 MIT
