@@ -19,14 +19,12 @@ A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern
 `classes` directory contains classes .h and .cpp files  
 `flux_config` directory contains histograms that define muon flux
 
-`test` directory contains not very professional, very simple tests for classes.  
+`test` directory very simple tests for classes. I know these tests are not very professional, but it's better than nothing anyway ;)  
 `presentation` directory contains Latex presentation (code, images and pdf output)  
 
 # Installation
 
-instalaction bash scripts for all cpp files are provided.
-
-Dear ROOT user, remember to source `thisroot.sh` before installation ;)
+instalaction bash scripts for all cpp files are provided. Please remember to source `thisroot.sh` before installation
 
 # License
 
