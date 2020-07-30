@@ -311,7 +311,7 @@ int main (int argc, char * argv[])
     int N = intree->GetEntries();
     for (int n=0; n<N; n++)
     {
-        if (n%300!=0) continue; //- smaller sample for tests and drawings
+        //if (n%300!=0) continue; //- 300x smaller sample for tests and drawings
         
         cout<<"Event: "<<n<<"\r"<<flush;
         intree->GetEvent(n);
@@ -376,7 +376,7 @@ int main (int argc, char * argv[])
         
         for (int f=0; f<8; f++)
         {
-            if (hitmodule[f] && hitmodule[f+14] && wallID==0) FluxTheta.AddBinContent(f,1);
+            if (hitmodule[f] && hitmodule[f+14]) FluxTheta.AddBinContent(f+1,1.);
         }
         
         
