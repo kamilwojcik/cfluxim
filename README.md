@@ -4,7 +4,7 @@ A simple cosmic ray simulation tool
 ## More details
 
 Only muons are implemented at the moment, but implementation of other particles is possible, if needed.  
-It is precisely described in the [presentation](https://github.com/kamilwojcik/cfluxim/blob/mcord/presentation/presentation.pdf)
+The tool is precisely described in the [presentation](https://github.com/kamilwojcik/cfluxim/blob/mcord/presentation/presentation.pdf)
 
 # Dependencies
 
@@ -19,12 +19,16 @@ A few classes of CERN's ROOT framework is used. See the [ROOT](https://root.cern
 `classes` directory contains classes .h and .cpp files  
 `flux_config` directory contains histograms that define muon flux
 
-`test` directory very simple tests for classes. I know these tests are not very professional, but it's better than nothing anyway ;)  
+`test` directory contains very simple tests for classes. I know these tests are not very professional, but it's better than nothing anyway ;)  
 `presentation` directory contains Latex presentation (code, images and pdf output)  
 
-# Installation
+# How to compile
 
-instalaction bash scripts for all cpp files are provided. Please remember to source `thisroot.sh` before installation
+Bash scripts for all components and tests are provided. Remember to source your `thisroot.sh` before compilation.
+
+You may run one of the scripts to compile a single module or test, or:
+-to compile all components at once, run `compileAllComponents.sh`
+-to compile all tests at once, run `compileAllTests.sh` (in `tests` directory)
 
 # License
 
