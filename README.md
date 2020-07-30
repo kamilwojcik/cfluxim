@@ -28,11 +28,7 @@ Bash scripts for all components and tests are provided. Remember to source your 
 
 You may run one of the scripts to compile a single module or test, or:
 - to compile all components at once, run `compileAllComponents.sh`
-<<<<<<< HEAD
 - to compile all tests at once, enter `test` directory and run `compileAllTests.sh`
-=======
-- to compile all tests at once, run `compileAllTests.sh` (in `tests` directory)
->>>>>>> parent of 8ab739f... readme update
 
 # License
 
