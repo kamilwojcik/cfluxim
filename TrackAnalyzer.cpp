@@ -15,7 +15,6 @@
 #include "TCanvas.h"
 
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <ctime>
 #include <cmath>
@@ -41,8 +40,6 @@ int main (int argc, char * argv[])
     
     TFile infile("cosmicCube.root");
     TTree* intree = (TTree*) infile.Get("CosmicCube");
-    
-    //intree->Print();
     
     int PID, wallID;
     float posX, posY, posZ;
@@ -131,8 +128,8 @@ int main (int argc, char * argv[])
     // modules
     //
     // 28 modules around the TPC
-    // w = 4,784 m (2x 2.392)
-    // l = 0.675 m (2x 0.3375)
+    // l = 4,784 m (2x 2.392)
+    // w = 0.675 m (2x 0.3375)
     // radius = 3311.5 
     
     Rectangle mod[28];
@@ -176,8 +173,7 @@ int main (int argc, char * argv[])
 //
 
     TRandom3 rng(time(NULL));
-    ofstream textfile("hitpositions.txt", ofstream::trunc);
-    string line;
+
     int N = intree->GetEntries();
     for (int n=0; n<N; n++)
     {
@@ -198,16 +194,9 @@ int main (int argc, char * argv[])
                 for (int i=0; i<hitvec.size(); i++)
                 {
                     hittpc[i]=true;
-                    tpc[i][0]=0;
-                    tpc[i][1]=0;
-                    tpc[i][2]=0;
                     tpc[i][0]=hitvec[i][0];
                     tpc[i][1]=hitvec[i][1];
                     tpc[i][2]=hitvec[i][2];
-                    
-                    
-                    line=to_string(hitvec[i][0]) + " " + to_string(hitvec[i][1]) + " " + to_string(hitvec[i][2]) + "\n";
-                    textfile<<line;
                 }
                 hitvec.clear();
                 
@@ -229,16 +218,9 @@ int main (int argc, char * argv[])
                 hitmodule[i]=true;
                 hitpos=mod[i].GetHitPosition();
                 
-                module[i][0]=0;
-                module[i][1]=0;
-                module[i][2]=0;
                 module[i][0]=hitpos[0];
                 module[i][1]=hitpos[1];
                 module[i][2]=hitpos[2];
-                
-                if (module[i][2] < 0 ) cout<<"Warning z<0"<<endl;
-                line=to_string(hitpos[0]) + " " + to_string(hitpos[1]) + " " + to_string(hitpos[2]) + "\n";
-                textfile<<line;
             }
             
         }
@@ -261,7 +243,6 @@ int main (int argc, char * argv[])
     cout<<"Number of analyzed events/particles: "<<N<<endl;
     outFile.Write();
     outFile.Close();
-    textfile.close();
     
     return 0;
 }
