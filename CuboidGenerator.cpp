@@ -67,7 +67,7 @@
 #define PIover2 1.5707963
 #define PI 3.1415927
 
-#define SIM_TIME 3600 //seconds, =1 hour
+#define SIM_TIME 180 //seconds
 
 int main (int argc, char * argv[])
 {
@@ -127,7 +127,7 @@ int main (int argc, char * argv[])
     /////////////////////////////////////////////////////
     //Loading flux and momentum distriutions
     
-    TFile * file= TFile::Open("flux_config/hMuMom.root");
+    TFile * file= TFile::Open("flux_config/hMuMom2.root");
     file->Print();
     TH1D * hMuMom= (TH1D*)file->Get("hMuMom");
     
