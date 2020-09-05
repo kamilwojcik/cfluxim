@@ -8,16 +8,20 @@
 #include "TH1D.h"
 #include "TRandom3.h"
 #include "TCanvas.h"
+#include "TF1.h"
 
 
 class RNGQuantile 
 {
     std::string description;
     
+    TF1 * fitfun;
+    
     TH1D* quantileHisto;
     TH1D* distributionHisto;
     TCanvas *cnv;
-
+    double scale;
+    
 protected:
     
     bool ready;

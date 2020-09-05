@@ -53,6 +53,7 @@ void RNGQuantile::SaveDistributionPng(std::string filename)
     return;
 }
 
+
 void RNGQuantile::ResetDistribution()
 {
     distributionHisto->Reset();
@@ -66,8 +67,11 @@ void RNGQuantile::ResetDistribution()
 double RNGQuantile::GetRandom()
 {
     double ans=0;
-    if (ready) ans=quantileHisto->GetBinCenter(quantileHisto->FindLastBinAbove(rng->Rndm()));
-    else cout<<"RNGQuantile not initialized!"<<endl;
+    //if (ready) ans=quantileHisto->GetBinCenter(quantileHisto->FindLastBinAbove(rng->Rndm()));
+    //else cout<<"RNGQuantile not initialized!"<<endl;
+    double rand=rng->Rndm()*scale;
+    if (rand < fitfun->Eval(500)) ans=500;
+    else ans=fitfun->GetX(rand);
     distributionHisto->Fill(ans);
     
     return ans;
@@ -98,6 +102,9 @@ RNGQuantile::RNGQuantile()
     rng = new TRandom3(time(NULL));
     description="Blank_RNGQuantile";
     ready = false;
+    
+    fitfun = new TF1("fitfun", "0.102458*pow(1.+x/(2.01358*2.),-2.)", 0, 500);
+    scale=fitfun->Eval(0);
 }
 
 
@@ -116,6 +123,8 @@ RNGQuantile::~RNGQuantile()
 {
     if (ready)
     {
+        SaveDistributionPng();
+        SaveDistribution();
         delete quantileHisto;
         delete distributionHisto;
     }
