@@ -17,10 +17,13 @@ void RNGQuantile::SetDescription(string descr)
 }
 
 
-void RNGQuantile::SetMomentumQuantileHisto(TH1D * momQuantile)
+void RNGQuantile::SetMomentumQuantileFunction(TF1 * momQuantile)
 {
-    quantileHisto = momQuantile;
-    distributionHisto=new TH1D("distributionHisto","distributionHisto",quantileHisto->GetNbinsX(), quantileHisto->GetXaxis()->GetXmin(),quantileHisto->GetXaxis()->GetXmax());
+    momentumQuantileFunction = momQuantile;
+    scale = momentumQuantileFunction->Eval(0);
+    ymin = momentumQuantileFunction->Eval(1000);
+    
+    distributionHisto=new TH1D("distributionHisto","distributionHisto",1000, 0, 1000);
     ready = true;
     
     return;
@@ -66,12 +69,10 @@ void RNGQuantile::ResetDistribution()
 
 double RNGQuantile::GetRandom()
 {
-    double ans=0;
-    //if (ready) ans=quantileHisto->GetBinCenter(quantileHisto->FindLastBinAbove(rng->Rndm()));
-    //else cout<<"RNGQuantile not initialized!"<<endl;
-    double rand=rng->Rndm()*scale;
-    if (rand < fitfun->Eval(500)) ans=500;
-    else ans=fitfun->GetX(rand);
+    double ans = 0;
+    double rand = rng->Rndm()*scale;
+    if (rand > ymin) ans = momentumQuantileFunction->GetX(rand);
+    else ans = 1000;
     distributionHisto->Fill(ans);
     
     return ans;
@@ -86,9 +87,9 @@ void RNGQuantile::Print()
     cout<<"RNGQuantule description: "<<description<<endl;
     if (ready)
     {
-        cout<<"Status: initialized"<<endl;
-        //cout<<"Nbins: "<<(hQuantile->GetNbinsX())<<" Xmin: "<<(hQuantile->GetXaxis()->GetXmin())<<" Xmax: "<<(hQuantile->GetXaxis()->GetXmax())<<endl;
-        //cout<<"Entries"<<(hDistribution->GetEntries())<<endl;
+        cout<<"Status: initialized\nQuantile function:\n"<<endl;
+        momentumQuantileFunction->Print();
+        cout<<"Distribution histo entries"<<(distributionHisto->GetEntries())<<endl;
     }
     else cout<<"Status: not initialized."<<endl;
     
@@ -102,17 +103,14 @@ RNGQuantile::RNGQuantile()
     rng = new TRandom3(time(NULL));
     description="Blank_RNGQuantile";
     ready = false;
-    
-    fitfun = new TF1("fitfun", "0.102458*pow(1.+x/(2.01358*2.),-2.)", 0, 500);
-    scale=fitfun->Eval(0);
 }
 
 
-RNGQuantile::RNGQuantile(TH1D * momQuantile, string descr)
+RNGQuantile::RNGQuantile(TF1 * momQuantile, string descr)
 {
     RNGQuantile();
     SetDescription(descr);
-    SetMomentumQuantileHisto(momQuantile);
+    SetMomentumQuantileFunction(momQuantile);
 }
 
 
@@ -125,7 +123,7 @@ RNGQuantile::~RNGQuantile()
     {
         SaveDistributionPng();
         SaveDistribution();
-        delete quantileHisto;
+        delete momentumQuantileFunction;
         delete distributionHisto;
     }
     delete rng;

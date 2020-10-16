@@ -67,7 +67,7 @@
 #define PIover2 1.5707963
 #define PI 3.1415927
 
-#define SIM_TIME 180 //seconds
+#define SIM_TIME 3600 //seconds
 
 int main (int argc, char * argv[])
 {
@@ -127,9 +127,9 @@ int main (int argc, char * argv[])
     /////////////////////////////////////////////////////
     //Loading flux and momentum distriutions
     
-    TFile * file= TFile::Open("flux_config/hMuMom2.root");
+    TFile * file= TFile::Open("flux_config/uMomentumIntegral.root");
     file->Print();
-    TH1D * hMuMom= (TH1D*)file->Get("hMuMom");
+    TF1 * uMomIntegral= (TF1*)file->Get("uMomentumIntegral");
     
     file = TFile::Open("flux_config/uFluxTheta.root");
     file->Print();
@@ -142,7 +142,7 @@ int main (int argc, char * argv[])
     ParticleGenerator pgen;
     pgen.SetPID(0);
     pgen.SetAreaXYSize(8,8);
-    pgen.SetMomentumQuantileHisto(hMuMom);
+    pgen.SetMomentumQuantileFunction(uMomIntegral);
     
     /////////////////////////////////////////////////////
     //FluxList common setup
@@ -180,7 +180,7 @@ int main (int argc, char * argv[])
         {
             double phiMin = PI+fluxmap->GetXaxis()->GetBinLowEdge(i);
             double phiMax = PI+fluxmap->GetXaxis()->GetBinUpEdge(i);
-            if (phiMax > PItimes2 || phiMin > PItimes2) 
+            if (phiMin >= PItimes2) 
             {
                 phiMax = phiMax - PItimes2;
                 phiMin = phiMin - PItimes2;

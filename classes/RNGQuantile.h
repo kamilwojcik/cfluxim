@@ -15,12 +15,11 @@ class RNGQuantile
 {
     std::string description;
     
-    TF1 * fitfun;
+    TF1 * momentumQuantileFunction;
     
-    TH1D* quantileHisto;
     TH1D* distributionHisto;
     TCanvas *cnv;
-    double scale;
+    double scale, ymin;
     
 protected:
     
@@ -30,7 +29,7 @@ protected:
 public:
 
     void SetDescription(std::string descr);
-    void SetMomentumQuantileHisto(TH1D * momQuantile);
+    void SetMomentumQuantileFunction(TF1 * momQuantile);
     void SaveDistribution(std::string filename="RNGdistribution.root");
     void SaveDistributionPng(std::string filename="RNGdistribution.png");
     void ResetDistribution();
@@ -40,7 +39,7 @@ public:
     void Print();
     
     RNGQuantile();
-    RNGQuantile(TH1D * momQuantile, std::string descr="RNGQuantile");
+    RNGQuantile(TF1 * momQuantile, std::string descr="RNGQuantile");
     
     ~RNGQuantile();
 };

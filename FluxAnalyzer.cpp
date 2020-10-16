@@ -160,7 +160,7 @@ int main (int argc, char * argv[])
     
     for (int n=0; n<N; n++)
     {
-        if (n%40!=0) continue; //- smaller sample for tests and drawings
+        //if (n%40!=0) continue; //- smaller sample for tests and drawings
         
         cout<<"Event: "<<n<<"\r"<<flush;
         intree->GetEvent(n);
